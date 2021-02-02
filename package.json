@@ -1,8 +1,8 @@
 {
-  "name": "my-new-app",
-  "productName": "my-new-app",
+  "name": "datapack-planet",
+  "productName": "datapack-planet",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A text editor for Minecraft DataPack",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
