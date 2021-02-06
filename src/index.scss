@@ -1,0 +1,41 @@
+@import "style/vars";
+
+html, body, div#root {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+div#menubar {
+  font-family: 'Segoe UI', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', -apple-system, 'Apple System', 'Arial', sans-serif;
+  font-size: $font-size;
+  color: $G800;
+  width: 100%;
+  height: $menubar-height;
+  background-color: $G100;
+  -webkit-app-region: drag;
+  line-height: $menubar-height;
+  text-align: center;
+  .button {
+    float: right;
+    -webkit-app-region: no-drag;
+    color: $G800;
+    &.close-button {
+      color: $err-border;
+    }
+  }
+  #icon {
+    padding: 0 10px;
+    font-weight: 600;
+    float: left;
+    display: inline-block;
+  }
+}
+
+.ms-CommandBar {
+  padding: 0;
+  width: 100%;
+}
