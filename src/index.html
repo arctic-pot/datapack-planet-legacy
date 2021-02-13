@@ -5,6 +5,15 @@
     <title>DataPack Planet</title>
 </head>
 <body>
+<div id="menubar">
+    <div id="icon" class="float-left">DataPack Planet</div>
+    <button class="button" id="close-button" onclick="require('electron').ipcRenderer.send('close')">
+        <i class="ms-Icon ms-Icon--ChromeClose"></i>
+    </button>
+    <button class="button" id="minimize-button" onclick="require('electron').ipcRenderer.send('minimize')">
+        <i class="ms-Icon ms-Icon--ChromeMinimize"></i>
+    </button>
+</div>
 <div id="root"></div>
 </body>
 </html>

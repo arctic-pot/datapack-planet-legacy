@@ -11,9 +11,11 @@ import {
     TextField
 } from '@fluentui/react';
 import React, {FormEvent, useState} from 'react';
+import SettingsPanel from './SettingsPanel';
 
 export default function CommandsBar() {
     const [newDialogHidden, setNewDialogHidden] = useState(true);
+    const [settingsShow, setSettingsShow] = useState(false);
     const [error, setError] = useState('');
     const [selectingTag, setSelectingTag] = useState(false);
     const [id, setId] = useState('');
@@ -73,9 +75,12 @@ export default function CommandsBar() {
                         key: 'setting',
                         text: 'Settings',
                         iconProps: { iconName: 'Settings' },
-                        iconOnly: true
+                        iconOnly: true,
+                        onClick: () => {
+                            setSettingsShow(true);
+                        }
                     }
-                    ]}
+                ]}
             />
             <Dialog
                 hidden={ newDialogHidden }
@@ -140,6 +145,7 @@ export default function CommandsBar() {
                     <DefaultButton onClick={() => setNewDialogHidden(true)} text="Cancel" />
                 </DialogFooter>
             </Dialog>
+            <SettingsPanel show={settingsShow} setStateFn={setSettingsShow} />
         </>
 
     )

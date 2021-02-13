@@ -1,4 +1,6 @@
-@import "style/vars";
+@import 'style/vars';
+/* https is required because when loading file in production mode, it is file:/// */
+@import url('https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css');
 
 html, body, div#root {
   padding: 0;
@@ -10,6 +12,8 @@ html, body, div#root {
 }
 
 div#menubar {
+  position: sticky;
+  z-index: 9999999;
   font-family: 'Segoe UI', 'Microsoft YaHei UI', 'Microsoft JhengHei UI', -apple-system, 'Apple System', 'Arial', sans-serif;
   font-size: $font-size;
   color: $G800;
@@ -19,14 +23,27 @@ div#menubar {
   -webkit-app-region: drag;
   line-height: $menubar-height;
   text-align: center;
+
   .button {
+    height: $menubar-height;
+    width: $menubar-height;
+    border: none;
+    background-color: transparent;
     float: right;
     -webkit-app-region: no-drag;
+    outline: none;
+    cursor: pointer;
     color: $G800;
+
+    &:hover {
+      background-color: $G300;
+    }
+
     &.close-button {
       color: $err-border;
     }
   }
+
   #icon {
     padding: 0 10px;
     font-weight: 600;

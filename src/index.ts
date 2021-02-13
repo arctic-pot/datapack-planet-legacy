@@ -24,10 +24,13 @@ const createWindow = (): void => {
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY).then();
 
   ipcMain.on('close', () => {
-      mainWindow.close();
+    mainWindow.close();
   });
   ipcMain.on('minimize', () => {
-      mainWindow.minimize();
+    mainWindow.minimize();
+  });
+  ipcMain.on('devtools', () => {
+    mainWindow.webContents.openDevTools();
   })
 };
 
