@@ -1,6 +1,6 @@
 import React from 'react';
 import { initializeIcons } from '@fluentui/react';
-import CommandsBar from "./components/CommandBars";
+import CommandsBar from './components/CommandBars';
 
 initializeIcons();
 
