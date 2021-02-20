@@ -8,6 +8,7 @@ Thanks for taking time to contribute us! The following tutorial will guide you t
   - [Ask a question](#ask-a-question)
   - [Report a bug](#report-a-bug)
   - [Feature request](#feature-request)
+  - [Localisation](#localisation)
   - [Pull request](#pull-request)
 - [Styleguide](#styleguide)
   - [JS & TS](#javascript-typescript-and-jsx-tsx)
@@ -26,7 +27,15 @@ We will review and resolve issue as we can. If you can resolve it, you can check
 ### Feature request
 If you're having an idea, you can describe it in Discussion.
 
-If you're requesting an feature, submit a new issue. Choose *Feature request* template instead *Bug report*
+If you're requesting a feature, submit a new issue. Choose *Feature request* template instead *Bug report*
+
+### Localisation
+Doesn't see your country in the language list? You can contribute to us.
+The locale files is in `/src/locale` folder. Copy the `en-us.ts` file 
+and rename to your own language with intl locale provider.
+When you do all those done, translate the string on the right side of the colon.
+
+**Note:** Do not use Google Translate and make sure the translation identifiers are completed.
 
 ### Pull request
 If you use GitHub often, you should already known how to start a pull request, But remember to follow [styleguide](#styleguide) please!

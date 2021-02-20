@@ -12,8 +12,10 @@ import {
 } from '@fluentui/react';
 import React, {FormEvent, useState} from 'react';
 import SettingsPanel from './SettingsPanel';
+import { injectIntl } from 'react-intl';
 
-export default function CommandsBar() {
+export default injectIntl(function CommandsBar(props: any) {
+    const { intl } = props
     const [newDialogHidden, setNewDialogHidden] = useState(true);
     const [settingsShow, setSettingsShow] = useState(false);
     const [error, setError] = useState('');
@@ -22,6 +24,7 @@ export default function CommandsBar() {
     const [tagType, setTagType] = useState('');
     const [type, setType] = useState('');
     const [prefix, setPrefix]: [string, React.Dispatch<React.SetStateAction<string>>] = useState(undefined);
+
     function typeSelectorChangeHandler(_e: React.FormEvent<HTMLDivElement>, item: IDropdownOption) {
         if (item.key === 'tags') {
             setSelectingTag(true);
@@ -44,37 +47,37 @@ export default function CommandsBar() {
                 items={[
                     {
                         key: 'new',
-                        text: 'New',
-                        iconProps: { iconName: 'Add' },
+                        text: intl.formatMessage({id: 'actions.new'}),
+                        iconProps: {iconName: 'Add'},
                         onClick: () => {
                             setNewDialogHidden(false);
                             setSelectingTag(false);
-                            setPrefix(undefined)
+                            setPrefix(undefined);
                         }
                     },
                     {
                         key: 'save',
-                        text: 'Save All',
-                        iconProps: { iconName: 'Save' },
+                        text: intl.formatMessage({id: 'actions.save'}),
+                        iconProps: {iconName: 'Save'},
                     },
                     {
                         key: 'open',
-                        text: 'Open',
-                        iconProps: { iconName: 'FolderOpen' },
+                        text: intl.formatMessage({id: 'actions.open'}),
+                        iconProps: {iconName: 'FolderOpen'},
                     },
                 ]}
                 overflowItems={[
                     {
                         key: 'metadata',
-                        text: 'Edit pack metadata',
-                        iconProps: { iconName: 'Edit' }
+                        text: intl.formatMessage({id: 'actions.editMeta'}),
+                        iconProps: {iconName: 'Edit'}
                     }
-                    ]}
+                ]}
                 farItems={[
                     {
                         key: 'setting',
                         text: 'Settings',
-                        iconProps: { iconName: 'Settings' },
+                        iconProps: {iconName: 'Settings'},
                         iconOnly: true,
                         onClick: () => {
                             setSettingsShow(true);
@@ -83,11 +86,11 @@ export default function CommandsBar() {
                 ]}
             />
             <Dialog
-                hidden={ newDialogHidden }
+                hidden={newDialogHidden}
                 dialogContentProps={{
                     type: DialogType.normal,
-                    title: 'Create File',
-                    subText: 'Create a new file and open editor. You should not add file extension.',
+                    title: intl.formatMessage({id: 'dialog.createFile.title'}),
+                    subText: intl.formatMessage({id: 'dialog.createFile.desc'}),
                     closeButtonAriaLabel: 'Close',
                     onDismiss: () => setNewDialogHidden(true)
                 }}
@@ -96,34 +99,34 @@ export default function CommandsBar() {
                     placeholder="Select the type of the new file"
                     label="New file type:"
                     options={[
-                        { key: 'advancements', text: 'Advancement' },
-                        { key: 'dimension_type', text: 'Dimension type' },
-                        { key: 'dimension', text: 'Dimension' },
-                        { key: 'functions', text: 'Function', selected: true },
-                        { key: 'item_modifiers', text: 'Item modifier', disabled: true },
-                        { key: 'loot_tables', text: 'Loot table' },
-                        { key: 'predicates', text: 'Predicate' },
-                        { key: 'recipes', text: 'Recipe' },
-                        { key: 'tags', text: 'Tag' },
+                        {key: 'advancements', text: intl.formatMessage({id: 'type.advancement'})},
+                        {key: 'dimension_type', text: intl.formatMessage({id: 'type.dimType'})},
+                        {key: 'dimension', text: intl.formatMessage({id: 'type.dim'})},
+                        {key: 'functions', text: intl.formatMessage({id: 'type.fn'}), selected: true},
+                        {key: 'item_modifiers', text: intl.formatMessage({id: 'type.itemModifier'}), disabled: true},
+                        {key: 'loot_tables', text: intl.formatMessage({id: 'type.lootTable'})},
+                        {key: 'predicates', text: intl.formatMessage({id: 'type.predicate'})},
+                        {key: 'recipes', text: intl.formatMessage({id: 'type.recipe'})},
+                        {key: 'tags', text: intl.formatMessage({id: 'type.tag'})},
                     ]}
                     onChange={typeSelectorChangeHandler}
                 />
-                <Label style={{ display: selectingTag ? undefined : 'none' }}>With the tag type:</Label>
+                <Label style={{display: selectingTag ? undefined : 'none'}}>With the tag type:</Label>
                 <Dropdown
-                    placeholder="Select the type of the tag"
+                    placeholder={intl.formatMessage({id: 'dialog.tagType'})}
                     options={[
-                        { key: 'blocks', text: 'Blocks tag' },
-                        { key: 'entity_types', text: 'Entity types tag' },
-                        { key: 'functions', text: 'Functions tag' },
-                        { key: 'fluids', text: 'Fluids tag' },
-                        { key: 'items', text: 'Items tag' },
+                        {key: 'blocks', text: 'Blocks tag'},
+                        {key: 'entity_types', text: 'Entity types tag'},
+                        {key: 'functions', text: 'Functions tag'},
+                        {key: 'fluids', text: 'Fluids tag'},
+                        {key: 'items', text: 'Items tag'},
                     ]}
                     hidden={!selectingTag}
                     onChange={(_e: FormEvent<HTMLDivElement>, item: IDropdownOption) => setTagType(item.key as string)}
                 />
                 <TextField
-                    placeholder="Namespace ID"
-                    label="Namespaced identifier:"
+                    placeholder={intl.formatMessage({id: 'general.nsId'})}
+                    label={`${intl.formatMessage({id: 'general.nsId'})}:`}
                     errorMessage={error}
                     onChange={(_e: React.FormEvent<HTMLInputElement>, newText: string) => {
                         if (newText.match(/^([a-z-0-9_]+:)?[a-z-0-9_]+(\/[a-z-0-9_]+)*$/g)) {
@@ -141,12 +144,12 @@ export default function CommandsBar() {
                 />
                 <DialogFooter>
 
-                    <PrimaryButton onClick={createHandler} text="Create" />
-                    <DefaultButton onClick={() => setNewDialogHidden(true)} text="Cancel" />
+                    <PrimaryButton onClick={createHandler} text={intl.formatMessage({id: 'button.create'})}/>
+                    <DefaultButton onClick={() => setNewDialogHidden(true)} text={intl.formatMessage({id: 'button.cancel'})} />
                 </DialogFooter>
             </Dialog>
-            <SettingsPanel show={settingsShow} setStateFn={setSettingsShow} />
+            <SettingsPanel show={settingsShow} setStateFn={setSettingsShow}/>
         </>
 
     )
-}
+});

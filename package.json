@@ -93,6 +93,8 @@
     "@fluentui/react": "^7.158.1",
     "@fluentui/styles": "^0.52.0",
     "electron-squirrel-startup": "^1.0.0",
-    "jquery": "^3.5.1"
+    "glob": "^7.1.6",
+    "jquery": "^3.5.1",
+    "react-intl": "^5.12.3"
   }
 }

@@ -1,0 +1,6 @@
+div.body-col {
+  // There is a <div> before
+  &:nth-child(2) {
+    width: 30%;
+  }
+}

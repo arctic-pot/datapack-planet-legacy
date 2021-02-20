@@ -7,7 +7,7 @@ interface ISettingsPanelProps {
     setStateFn: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function SettingsPanel(props: ISettingsPanelProps) {
+export default function SettingsPanel(props: ISettingsPanelProps): JSX.Element {
     const { show, setStateFn } = props
 
     return (
@@ -18,14 +18,23 @@ export default function SettingsPanel(props: ISettingsPanelProps) {
                 <PivotItem headerText="Experience" itemIcon="TestBeaker">
                 </PivotItem>
                 <PivotItem headerText="Dev-Options" itemIcon="Repair">
-                    <div style={{padding: 5}}>
+                    <div style={{padding: 10}}>
                         <CompoundButton
                             secondaryText="Open electron built-in devtools to debug"
                             onClick={() => {
-                                ipcRenderer.send('devtools')
+                                ipcRenderer.send('devtools');
                             }}
                         >
                             Open DevTools
+                        </CompoundButton>
+                        <br /><br />
+                        <CompoundButton
+                            secondaryText="Reload page to see latest update"
+                            onClick={() => {
+                                location.reload();
+                            }}
+                        >
+                            Reload
                         </CompoundButton>
                     </div>
                 </PivotItem>
