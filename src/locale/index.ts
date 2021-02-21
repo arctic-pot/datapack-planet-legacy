@@ -1,7 +1,7 @@
 import en from './en';
 
 const locales: { [L: string]: { [K: string]: string } } = {
-    en,
+  en,
 };
 
 export default locales;
