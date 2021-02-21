@@ -6,17 +6,26 @@ import FileList from './FileList';
 import './Body.scss'
 
 export default function Body(): JSX.Element {
-    const [filePath, setFilePath] = useState('');
+    const filePath = path.resolve(JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root, './data');
     const [items, setItems] = useState(getFileListItems());
+    const [groups, setGroups] = useState([
+        { key: '', name: '', startIndex: 0, count: 0, level: 0 }
+    ]);
 
     function getFileListItems() {
         function generateType(pathname: string) {
-            const split = pathname.split(/\//g);
-            const length = split.length;
+            console.log(pathname)
+            const typeList = pathname.match(/functions|advancements|recipes|loot_tables|predicates/g);
+            const nameList = pathname.match(/.*\/(functions|advancements|recipes|loot_tables|predicates)\/(.*\/)?.*\./g);
+            const names = nameList[0];
+            const [, nameNS, , ...pathTo] = names.split(/\//g);
+            const pathToValid = pathTo.join('/').slice(0, pathTo.join('/').length - 1);
+            const name = `${nameNS}:${pathToValid}`;
+
             return {
-                type: split[length - 2],
-                name: split[length - 1],
-                dir: pathname
+                type: typeList[typeList.length - 1],
+                name: name,
+                dir: path.resolve(filePath, pathname),
             }
         }
         const JSONSchemas = glob.sync(
@@ -38,10 +47,10 @@ export default function Body(): JSX.Element {
     }
 
     return (
-        <>
+        <div className="body">
             <div className="body-col">
-                <FileList items={items} />
+                <FileList items={items} groups={groups} />
             </div>
-        </>
+        </div>
     )
 }
