@@ -1,5 +1,5 @@
 import React from 'react';
-import {DetailsList, SelectionMode, IGroup} from '@fluentui/react';
+import { DetailsList, SelectionMode, IGroup } from '@fluentui/react';
 
 interface IFileListProps {
     items: any[];
@@ -7,7 +7,6 @@ interface IFileListProps {
 }
 
 export default function FileList(props: IFileListProps): JSX.Element {
-
     return (
         <DetailsList
             columns={[
@@ -29,5 +28,5 @@ export default function FileList(props: IFileListProps): JSX.Element {
             compact
             selectionMode={SelectionMode.none}
         />
-    )
+    );
 }

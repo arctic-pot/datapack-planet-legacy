@@ -1,3 +1,3 @@
-import React from "react";
-import App from "./App";
-export default <App />
+import React from 'react';
+import App from './App';
+export default <App />;
