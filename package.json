@@ -13,10 +13,7 @@
     "format": "npx prettier --write \"src/**/*.{tsx,ts,js}\""
   },
   "keywords": [],
-  "author": {
-    "name": "TheColdPot",
-    "email": "guohw979@outlook.com"
-  },
+  "author": "The DataPack Planet team",
   "license": "MIT",
   "config": {
     "forge": {
