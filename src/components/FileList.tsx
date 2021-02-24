@@ -11,19 +11,14 @@ export default function FileList(props: IFileListProps): JSX.Element {
     <DetailsList
       columns={[
         {
-          key: 'col1',
-          name: 'Type',
-          fieldName: 'type',
-          minWidth: 0,
-        },
-        {
           key: 'col2',
           name: 'Name',
           fieldName: 'name',
           minWidth: outerWidth * 0.1,
         },
       ]}
-      isHeaderVisible={true}
+      groups={props.groups}
+      isHeaderVisible={false}
       items={props.items}
       compact
       selectionMode={SelectionMode.none}

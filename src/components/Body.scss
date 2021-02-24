@@ -11,21 +11,23 @@ div.body-col {
     height: 100%;
     overflow-y: auto;
 
+    .ms-FocusZone.ms-DetailsHeader {
+      padding: 0;
+    }
+
     &::-webkit-scrollbar {
       width: 5px;
       background-color: #fff;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #bbb;
-      opacity: 0;
-      transition-property: opacity;
-      transition-duration:
-        0.2s;
+      background: rgba(255, 255, 255, 0);
+      transition-property: all;
+      transition-duration: 0.2s;
     }
 
     &:hover::-webkit-scrollbar-thumb {
-      opacity: 1;
+      background: rgba(221, 221, 221, 1);
     }
 
     &::-webkit-scrollbar-button {
