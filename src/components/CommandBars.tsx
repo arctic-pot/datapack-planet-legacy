@@ -158,7 +158,7 @@ export default injectIntl(function CommandsBar(props: any) {
           With the tag type:
         </Label>
         <Dropdown
-          placeholder={intl.formatMessage({ id: 'dialog.tagType' })}
+          placeholder={intl.formatMessage({ id: 'dialog.createFile.tagType' })}
           options={[
             { key: 'blocks', text: 'Blocks tag' },
             { key: 'entity_types', text: 'Entity types tag' },
