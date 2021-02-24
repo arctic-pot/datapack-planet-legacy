@@ -21,13 +21,13 @@ div.body-col {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0);
+      background: #fff0;
       transition-property: all;
       transition-duration: 0.2s;
     }
 
     &:hover::-webkit-scrollbar-thumb {
-      background: rgba(221, 221, 221, 1);
+      background: #cccf;
     }
 
     &::-webkit-scrollbar-button {

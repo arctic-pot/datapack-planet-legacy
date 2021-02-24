@@ -123,7 +123,7 @@ export default function Body(): JSX.Element {
         }
       : undefined;
 
-    return [group1, group2, group3, group4, group4].filter(
+    return [group1, group2, group3, group4, group5].filter(
       (group: IGroupFormat) => !!group
     );
   }
