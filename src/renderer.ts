@@ -30,12 +30,10 @@ fs.access('./settings.json', (err) => {
 });
 
 // Load page before loaded
-(async () => {
-  ReactDOM.render(
-    React.createElement(LoadingApp),
-    document.getElementById('root')
-  );
-})();
+ReactDOM.render(
+  React.createElement(LoadingApp),
+  document.getElementById('root')
+);
 
 // Using a timeout to making effect and be sure the application will keep running
 setTimeout(() => {
@@ -57,13 +55,14 @@ setTimeout(() => {
     // correctly appear on the page
 
     setTimeout(() => {
-      ReactDOM.render(App, document.getElementById('root'));
       if (JSON.parse(data.toString()).directories.root === null) {
         console.error('Err: no directory selected');
         ReactDOM.render(
           React.createElement(NoDir),
           document.getElementById('root')
         );
+      } else {
+        ReactDOM.render(App, document.getElementById('root'));
       }
     }, 500);
   });
