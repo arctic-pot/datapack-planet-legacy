@@ -22,7 +22,9 @@ const createWindow = (): void => {
     },
   });
 
-  mainWindow.webContents.openDevTools();
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools();
+  }
   mainWindow.maximize();
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY).then();
 
