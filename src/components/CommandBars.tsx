@@ -20,9 +20,11 @@ export default injectIntl(function CommandsBar(props: any) {
   const [settingsShow, setSettingsShow] = useState(false);
   const [error, setError] = useState('');
   const [selectingTag, setSelectingTag] = useState(false);
-  const [id, setId] = useState('');
+  /* eslint-disable @typescript-eslint/no-unused-vars */
+  const [id, setId] = useState('')
   const [tagType, setTagType] = useState('');
   const [type, setType] = useState('');
+  /* eslint-enable */
   const [prefix, setPrefix]: [
     string,
     React.Dispatch<React.SetStateAction<string>>
