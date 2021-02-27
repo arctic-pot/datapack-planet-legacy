@@ -6,8 +6,8 @@ import { IntlProvider } from 'react-intl';
 
 initializeIcons();
 
-let locale: string = sessionStorage.getItem('locale');
-let messages: any = JSON.parse(sessionStorage.getItem('messages'));
+const locale: string = sessionStorage.getItem('locale');
+const messages: any = JSON.parse(sessionStorage.getItem('messages'));
 
 console.log(sessionStorage.getItem('messages'))
 console.log(messages)
@@ -17,7 +17,7 @@ if (!sessionStorage.getItem('loaded')) {
   location.reload();
 }
 
-function App(_props: any): JSX.Element {
+function App(): JSX.Element {
   return (
     <IntlProvider messages={messages} locale={locale}>
       <CommandsBar />
