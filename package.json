@@ -10,8 +10,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts .",
-    "format": "npx prettier --write \"src/**/*.{tsx,ts,js}\""
+    "lint": "eslint ./src/**/*.{ts,tsx}",
+    "format": "prettier --write \"src/**/*.{tsx,ts,js}\"",
+    "format:check": "npx prettier --list-different \"src/**/*.{tsx,ts,js}\""
   },
   "keywords": [],
   "author": "The DataPack Planet team",
