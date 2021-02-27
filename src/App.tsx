@@ -9,8 +9,8 @@ initializeIcons();
 const locale: string = sessionStorage.getItem('locale');
 const messages = JSON.parse(sessionStorage.getItem('messages'));
 
-console.log(sessionStorage.getItem('messages'))
-console.log(messages)
+console.log(sessionStorage.getItem('messages'));
+console.log(messages);
 
 if (!sessionStorage.getItem('loaded')) {
   sessionStorage.setItem('loaded', String(true));

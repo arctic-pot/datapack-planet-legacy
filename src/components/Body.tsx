@@ -36,9 +36,7 @@ export default function Body(): JSX.Element {
       );
       const names = nameList[0];
       const [, nameNS, , ...pathTo] = names.split(/\//g);
-      const pathToValid = pathTo
-        .join('/')
-        .slice(0, pathTo.join('/').length - 1);
+      const pathToValid = pathTo.join('/').slice(0, pathTo.join('/').length - 1);
       const name = `${nameNS}:${pathToValid}`;
 
       return {
@@ -56,9 +54,7 @@ export default function Body(): JSX.Element {
     });
 
     const fileList: Array<IItemFormat> = [];
-    [...JSONSchemas, ...MCFunctions].forEach((item: string) =>
-      fileList.push(generateType(item))
-    );
+    [...JSONSchemas, ...MCFunctions].forEach((item: string) => fileList.push(generateType(item)));
     fileList.sort((a, b) => {
       if (a.name < b.name) return -1;
       if (a.name > b.name) return 1;
@@ -133,8 +129,7 @@ export default function Body(): JSX.Element {
       ? {
           key: 'group6',
           name: 'Tags',
-          startIndex:
-            advancements + dimensions + dimensionTypes + functions + lootTables,
+          startIndex: advancements + dimensions + dimensionTypes + functions + lootTables,
           count: tags,
         }
       : undefined;

@@ -21,19 +21,15 @@ export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedC
   const [error, setError] = useState('');
   const [selectingTag, setSelectingTag] = useState(false);
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  const [id, setId] = useState('')
+  const [id, setId] = useState('');
   const [tagType, setTagType] = useState('');
   const [type, setType] = useState('');
   /* eslint-enable */
-  const [prefix, setPrefix]: [
-    string,
-    React.Dispatch<React.SetStateAction<string>>
-  ] = useState(undefined);
+  const [prefix, setPrefix]: [string, React.Dispatch<React.SetStateAction<string>>] = useState(
+    undefined
+  );
 
-  function typeSelectorChangeHandler(
-    _e: React.FormEvent<HTMLDivElement>,
-    item: IDropdownOption
-  ) {
+  function typeSelectorChangeHandler(_e: React.FormEvent<HTMLDivElement>, item: IDropdownOption) {
     if (item.key === 'tags') {
       setSelectingTag(true);
       setPrefix('#');
@@ -156,9 +152,7 @@ export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedC
           ]}
           onChange={typeSelectorChangeHandler}
         />
-        <Label style={{ display: selectingTag ? undefined : 'none' }}>
-          With the tag type:
-        </Label>
+        <Label style={{ display: selectingTag ? undefined : 'none' }}>With the tag type:</Label>
         <Dropdown
           placeholder={intl.formatMessage({ id: 'dialog.createFile.tagType' })}
           options={[
@@ -177,13 +171,8 @@ export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedC
           placeholder={intl.formatMessage({ id: 'general.nsId' })}
           label={`${intl.formatMessage({ id: 'general.nsId' })}:`}
           errorMessage={error}
-          onChange={(
-            _e: React.FormEvent<HTMLInputElement>,
-            newText: string
-          ) => {
-            if (
-              newText.match(/^([a-z-0-9_]+:)?[a-z-0-9_]+(\/[a-z-0-9_]+)*$/g)
-            ) {
+          onChange={(_e: React.FormEvent<HTMLInputElement>, newText: string) => {
+            if (newText.match(/^([a-z-0-9_]+:)?[a-z-0-9_]+(\/[a-z-0-9_]+)*$/g)) {
               if (!newText.match(/[^a-z-0-9_]/g)) {
                 setError('Do not omit "minecraft" namespace');
               } else {

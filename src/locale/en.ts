@@ -18,6 +18,5 @@ export default {
   'type.tag': 'Tag',
   'dialog.createFile.tagType': 'Select the type of the tag',
   'dialog.createFile.title': 'Create File',
-  'dialog.createFile.desc':
-    'Create a new file and open editor. You should not add file extension.',
+  'dialog.createFile.desc': 'Create a new file and open editor. You should not add file extension.',
 };

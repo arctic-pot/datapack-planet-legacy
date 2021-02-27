@@ -11,10 +11,7 @@ function select() {
   });
   if (selected) {
     settings.directories.root = path.resolve(selected[0]);
-    fs.writeFileSync(
-      './settings.json',
-      Buffer.from(JSON.stringify(settings, null, 4))
-    );
+    fs.writeFileSync('./settings.json', Buffer.from(JSON.stringify(settings, null, 4)));
     location.reload();
   }
 }
@@ -35,9 +32,7 @@ export default function NoDir(): JSX.Element {
       <Label>You have not selected any workspace</Label>
       <div>&nbsp;</div>
       <div>
-        <DefaultButton onClick={select}>
-          Select an existing DataPack
-        </DefaultButton>
+        <DefaultButton onClick={select}>Select an existing DataPack</DefaultButton>
         &nbsp;or&nbsp;
         <DefaultButton disabled>Create a DataPack</DefaultButton>
       </div>
