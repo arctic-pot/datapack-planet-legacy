@@ -10,16 +10,16 @@ export default function Body(): JSX.Element {
     JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root,
     './data'
   );
-  const [items, setItems] = useState(_getFileListItems());
-  const [groups, setGroups] = useState(_getGroups());
+  const [items, ] = useState(_getFileListItems());
+  const [groups, ] = useState(_getGroups());
 
   function _getFileListItems() {
     function generateType(pathname: string) {
       const typeList = pathname.match(
-        /functions|advancements|recipes|loot_tables|predicates/g
+        /functions|advancements|recipes|loot_tables|predicates|tags/g
       );
       const nameList = pathname.match(
-        /.*\/(functions|advancements|recipes|loot_tables|predicates)\/(.*\/)?.*\./g
+        /.*\/(functions|advancements|recipes|loot_tables|predicates|tags)\/(.*\/)?.*\./g
       );
       const names = nameList[0];
       const [, nameNS, , ...pathTo] = names.split(/\//g);
@@ -29,13 +29,13 @@ export default function Body(): JSX.Element {
       const name = `${nameNS}:${pathToValid}`;
 
       return {
-        type: typeList[typeList.length - 1],
+        type: typeList[0],
         name: name,
         dir: path.resolve(filePath, pathname),
       };
     }
     const JSONSchemas = glob.sync(
-      './*/@(advancements|recipes|loot_tables|predicates)/**/*.json',
+      './*/@(advancements|recipes|loot_tables|predicates|tags)/**/*.json',
       { cwd: filePath }
     );
     const MCFunctions = glob.sync('./*/functions/**/*.mc' + 'function', {
@@ -60,19 +60,20 @@ export default function Body(): JSX.Element {
   }
 
   function _getGroups() {
-    let advancements: number = 0,
-      recipes: number = 0,
-      lootTables: number = 0,
-      dimensions: number = 0,
-      dimensionTypes: number = 0,
-      functions: number = 0;
+    let advancements = 0,
+      lootTables = 0,
+      dimensions = 0,
+      dimensionTypes = 0,
+      tags = 0,
+      functions = 0;
 
-    items.forEach((item: any, _index: number, _arr: any[]) => {
+    items.forEach((item: any) => {
       if (item.type === 'advancements') advancements += 1;
       if (item.type === 'functions') functions += 1;
       if (item.type === 'dimension') dimensions += 1;
       if (item.type === 'dimension_types') dimensionTypes += 1;
       if (item.type === 'loot_tables') lootTables += 1;
+      if (item.type === 'tags') tags += 1;
     });
 
     interface IGroupFormat {
@@ -84,52 +85,59 @@ export default function Body(): JSX.Element {
 
     const group1: IGroupFormat = advancements
       ? {
-          key: 'group1',
-          name: 'Advancements',
-          startIndex: 0,
-          count: advancements,
-        }
+        key: 'group1',
+        name: 'Advancements',
+        startIndex: 0,
+        count: advancements,
+      }
       : undefined;
     const group2: IGroupFormat = dimensions
       ? {
-          key: 'group2',
-          name: 'Dimensions',
-          startIndex: advancements,
-          count: dimensions,
-        }
+        key: 'group2',
+        name: 'Dimensions',
+        startIndex: advancements,
+        count: dimensions,
+      }
       : undefined;
     const group3: IGroupFormat = dimensionTypes
       ? {
-          key: 'group3',
-          name: 'Dimension Types',
-          startIndex: advancements + dimensions,
-          count: dimensionTypes,
-        }
+        key: 'group3',
+        name: 'Dimension Types',
+        startIndex: advancements + dimensions,
+        count: dimensionTypes,
+      }
       : undefined;
     const group4: IGroupFormat = functions
       ? {
-          key: 'group4',
-          name: 'Functions',
-          startIndex: advancements + dimensions + dimensionTypes,
-          count: functions,
-        }
+        key: 'group4',
+        name: 'Functions',
+        startIndex: advancements + dimensions + dimensionTypes,
+        count: functions,
+      }
       : undefined;
     const group5: IGroupFormat = lootTables
       ? {
-          key: 'group5',
-          name: 'Loot Tables',
-          startIndex: advancements + dimensions + dimensionTypes + functions,
-          count: lootTables,
-        }
+        key: 'group5',
+        name: 'Loot Tables',
+        startIndex: advancements + dimensions + dimensionTypes + functions,
+        count: lootTables,
+      }
+      : undefined;
+    const group6: IGroupFormat = tags
+      ? {
+        key: 'group6',
+        name: 'Tags',
+        startIndex:
+          advancements + dimensions + dimensionTypes + functions + lootTables,
+        count: tags,
+      }
       : undefined;
 
-    return [group1, group2, group3, group4, group5].filter(
+    const validGroups = [group1, group2, group3, group4, group5, group6].filter(
       (group: IGroupFormat) => !!group
     );
-  }
-
-  function refresh() {
-    setItems(_getFileListItems());
+    console.log(tags);
+    return validGroups;
   }
 
   return (
