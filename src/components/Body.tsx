@@ -13,9 +13,9 @@ interface IGroupFormat {
 }
 
 interface IItemFormat {
-  type: string,
-  name: string,
-  dir: string
+  type: string;
+  name: string;
+  dir: string;
 }
 
 export default function Body(): JSX.Element {
@@ -23,8 +23,8 @@ export default function Body(): JSX.Element {
     JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root,
     './data'
   );
-  const [items, ] = useState(_getFileListItems());
-  const [groups, ] = useState(_getGroups());
+  const [items] = useState(_getFileListItems());
+  const [groups] = useState(_getGroups());
 
   function _getFileListItems(): Array<IItemFormat> {
     function generateType(pathname: string): IItemFormat {
@@ -91,52 +91,52 @@ export default function Body(): JSX.Element {
 
     const group1: IGroupFormat = advancements
       ? {
-        key: 'group1',
-        name: 'Advancements',
-        startIndex: 0,
-        count: advancements,
-      }
+          key: 'group1',
+          name: 'Advancements',
+          startIndex: 0,
+          count: advancements,
+        }
       : undefined;
     const group2: IGroupFormat = dimensions
       ? {
-        key: 'group2',
-        name: 'Dimensions',
-        startIndex: advancements,
-        count: dimensions,
-      }
+          key: 'group2',
+          name: 'Dimensions',
+          startIndex: advancements,
+          count: dimensions,
+        }
       : undefined;
     const group3: IGroupFormat = dimensionTypes
       ? {
-        key: 'group3',
-        name: 'Dimension Types',
-        startIndex: advancements + dimensions,
-        count: dimensionTypes,
-      }
+          key: 'group3',
+          name: 'Dimension Types',
+          startIndex: advancements + dimensions,
+          count: dimensionTypes,
+        }
       : undefined;
     const group4: IGroupFormat = functions
       ? {
-        key: 'group4',
-        name: 'Functions',
-        startIndex: advancements + dimensions + dimensionTypes,
-        count: functions,
-      }
+          key: 'group4',
+          name: 'Functions',
+          startIndex: advancements + dimensions + dimensionTypes,
+          count: functions,
+        }
       : undefined;
     const group5: IGroupFormat = lootTables
       ? {
-        key: 'group5',
-        name: 'Loot Tables',
-        startIndex: advancements + dimensions + dimensionTypes + functions,
-        count: lootTables,
-      }
+          key: 'group5',
+          name: 'Loot Tables',
+          startIndex: advancements + dimensions + dimensionTypes + functions,
+          count: lootTables,
+        }
       : undefined;
     const group6: IGroupFormat = tags
       ? {
-        key: 'group6',
-        name: 'Tags',
-        startIndex:
-          advancements + dimensions + dimensionTypes + functions + lootTables,
-        count: tags,
-      }
+          key: 'group6',
+          name: 'Tags',
+          startIndex:
+            advancements + dimensions + dimensionTypes + functions + lootTables,
+          count: tags,
+        }
       : undefined;
 
     const validGroups = [group1, group2, group3, group4, group5, group6].filter(
