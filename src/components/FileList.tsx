@@ -1,8 +1,14 @@
 import React from 'react';
 import { DetailsList, SelectionMode, IGroup } from '@fluentui/react';
 
+interface IItemFormat {
+  type: string,
+  name: string,
+  dir: string
+}
+
 interface IFileListProps {
-  items: any[];
+  items: IItemFormat[];
   groups: IGroup[];
 }
 

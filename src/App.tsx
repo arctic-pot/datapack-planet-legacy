@@ -7,7 +7,7 @@ import { IntlProvider } from 'react-intl';
 initializeIcons();
 
 const locale: string = sessionStorage.getItem('locale');
-const messages: any = JSON.parse(sessionStorage.getItem('messages'));
+const messages = JSON.parse(sessionStorage.getItem('messages'));
 
 console.log(sessionStorage.getItem('messages'))
 console.log(messages)

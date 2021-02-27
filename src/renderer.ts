@@ -37,7 +37,7 @@ ReactDOM.render(
 
 // Using a timeout to making effect and be sure the application will keep running
 setTimeout(() => {
-  fs.readFile('./settings.json', (err: any, data: Buffer) => {
+  fs.readFile('./settings.json', (err: Error|null, data: Buffer) => {
     sessionStorage.setItem('language', JSON.parse(data.toString()).lang);
     sessionStorage.setItem(
       'messages',

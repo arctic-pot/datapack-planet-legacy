@@ -10,11 +10,11 @@ import {
   PrimaryButton,
   TextField,
 } from '@fluentui/react';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, PropsWithChildren, useState } from 'react';
 import SettingsPanel from './SettingsPanel';
-import { injectIntl } from 'react-intl';
+import { injectIntl, WrappedComponentProps } from 'react-intl';
 
-export default injectIntl(function CommandsBar(props: any) {
+export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedComponentProps>) {
   const { intl } = props;
   const [newDialogHidden, setNewDialogHidden] = useState(true);
   const [settingsShow, setSettingsShow] = useState(false);

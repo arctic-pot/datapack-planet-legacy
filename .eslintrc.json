@@ -17,8 +17,6 @@
   ],
   "parser": "@typescript-eslint/parser",
   "rules": {
-    "@typescript-eslint/no-explicit-any": "off",
-    // TODO: Removing unresolved
     "import/no-unresolved": "off"
   }
 }

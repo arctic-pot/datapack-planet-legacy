@@ -5,6 +5,19 @@ import glob from 'glob';
 import FileList from './FileList';
 import './Body.scss';
 
+interface IGroupFormat {
+  key: string;
+  name: string;
+  startIndex: number;
+  count: number;
+}
+
+interface IItemFormat {
+  type: string,
+  name: string,
+  dir: string
+}
+
 export default function Body(): JSX.Element {
   const filePath = path.resolve(
     JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root,
@@ -13,8 +26,8 @@ export default function Body(): JSX.Element {
   const [items, ] = useState(_getFileListItems());
   const [groups, ] = useState(_getGroups());
 
-  function _getFileListItems() {
-    function generateType(pathname: string) {
+  function _getFileListItems(): Array<IItemFormat> {
+    function generateType(pathname: string): IItemFormat {
       const typeList = pathname.match(
         /functions|advancements|recipes|loot_tables|predicates|tags/g
       );
@@ -42,7 +55,7 @@ export default function Body(): JSX.Element {
       cwd: filePath,
     });
 
-    const fileList: Array<any> = [];
+    const fileList: Array<IItemFormat> = [];
     [...JSONSchemas, ...MCFunctions].forEach((item: string) =>
       fileList.push(generateType(item))
     );
@@ -67,7 +80,7 @@ export default function Body(): JSX.Element {
       tags = 0,
       functions = 0;
 
-    items.forEach((item: any) => {
+    items.forEach((item: IItemFormat) => {
       if (item.type === 'advancements') advancements += 1;
       if (item.type === 'functions') functions += 1;
       if (item.type === 'dimension') dimensions += 1;
@@ -75,13 +88,6 @@ export default function Body(): JSX.Element {
       if (item.type === 'loot_tables') lootTables += 1;
       if (item.type === 'tags') tags += 1;
     });
-
-    interface IGroupFormat {
-      key: string;
-      name: string;
-      startIndex: number;
-      count: number;
-    }
 
     const group1: IGroupFormat = advancements
       ? {
