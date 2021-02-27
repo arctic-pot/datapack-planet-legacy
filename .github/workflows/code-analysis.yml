@@ -1,0 +1,16 @@
+name: Code Analysis
+on:
+  push:
+    branches:
+      - main
+jobs:
+  codacy:
+    runs-on: ubuntu-latest
+    name: Codacy Analysis
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Run codacy-analysis-cli
+        uses: codacy/codacy-analysis-cli-action@master
+        with:
+          tool: ESLint, Prettier
