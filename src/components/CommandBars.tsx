@@ -16,18 +16,16 @@ import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedComponentProps>) {
   const { intl } = props;
-  const [newDialogHidden, setNewDialogHidden] = useState(true);
-  const [settingsShow, setSettingsShow] = useState(false);
-  const [error, setError] = useState('');
-  const [selectingTag, setSelectingTag] = useState(false);
+  const [newDialogHidden, setNewDialogHidden] = useState<boolean>(true);
+  const [settingsShow, setSettingsShow] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
+  const [selectingTag, setSelectingTag] = useState<boolean>(false);
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  const [id, setId] = useState('');
-  const [tagType, setTagType] = useState('');
-  const [type, setType] = useState('');
+  const [id, setId] = useState<string>('');
+  const [tagType, setTagType] = useState<string>('');
+  const [type, setType] = useState<string>('');
   /* eslint-enable */
-  const [prefix, setPrefix]: [string, React.Dispatch<React.SetStateAction<string>>] = useState(
-    undefined
-  );
+  const [prefix, setPrefix] = useState<string>(undefined);
 
   function typeSelectorChangeHandler(_e: React.FormEvent<HTMLDivElement>, item: IDropdownOption) {
     if (item.key === 'tags') {

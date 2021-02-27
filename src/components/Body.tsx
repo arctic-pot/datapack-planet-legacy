@@ -23,8 +23,8 @@ export default function Body(): JSX.Element {
     JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root,
     './data'
   );
-  const [items] = useState(_getFileListItems());
-  const [groups] = useState(_getGroups());
+  const [items] = useState<IItemFormat[]>(_getFileListItems());
+  const [groups] = useState<IGroupFormat[]>(_getGroups());
 
   function _getFileListItems(): Array<IItemFormat> {
     function generateType(pathname: string): IItemFormat {
