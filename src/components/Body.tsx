@@ -133,10 +133,9 @@ export default function Body(): JSX.Element {
         }
       : undefined;
 
-    const validGroups = [group1, group2, group3, group4, group5, group6].filter(
+    return [group1, group2, group3, group4, group5, group6].filter(
       (group: IGroupFormat) => !!group
     );
-    return validGroups;
   }
 
   if (shouldWatch) {
