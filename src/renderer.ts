@@ -13,16 +13,12 @@ fs.access('./settings.json', (err) => {
   if (err) {
     fs.writeFileSync(
       './settings.json',
-      JSON.stringify(
-        {
-          lang: 'en',
-          directories: {
-            root: null,
-          },
+      JSON.stringify({
+        lang: 'en',
+        directories: {
+          root: null,
         },
-        null,
-        4
-      )
+      })
     );
   }
 });
