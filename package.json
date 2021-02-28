@@ -93,6 +93,7 @@
     "@fluentui/react": "^7.158.1",
     "@fluentui/styles": "^0.52.0",
     "electron-squirrel-startup": "^1.0.0",
+    "fs-extra": "^9.1.0",
     "glob": "^7.1.6",
     "jquery": "^3.5.1",
     "node-watch": "^0.7.1",
