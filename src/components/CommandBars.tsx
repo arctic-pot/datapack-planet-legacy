@@ -41,7 +41,7 @@ export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedC
 
   function createHandler() {
     setNewDialogHidden(true);
-    createFileByNsId(sessionStorage.getItem('dir'), type as TFileType, id)
+    createFileByNsId(sessionStorage.getItem('dir'), type as TFileType, id);
   }
 
   return (

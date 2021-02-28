@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
 import FileList from './FileList';
@@ -22,10 +21,7 @@ interface IItemFormat {
 let shouldWatch = true;
 
 export default function Body(): JSX.Element {
-  const filePath = path.resolve(
-    sessionStorage.getItem('dir'),
-    './data'
-  );
+  const filePath = path.resolve(sessionStorage.getItem('dir'), './data');
   const [items, setItems] = useState<IItemFormat[]>(_getFileListItems());
   const [groups, setGroups] = useState<IGroupFormat[]>(_getGroups());
 
@@ -161,7 +157,7 @@ export default function Body(): JSX.Element {
         console.log('%s changed.', name);
         setGroups(_getGroups());
         setItems(_getFileListItems());
-        shouldWatch = false
+        shouldWatch = false;
       }
     );
   }

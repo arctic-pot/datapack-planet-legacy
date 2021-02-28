@@ -36,7 +36,10 @@ setTimeout(() => {
     sessionStorage.setItem('language', JSON.parse(data.toString()).lang);
     sessionStorage.setItem('messages', JSON.stringify(locales[JSON.parse(data.toString()).lang]));
     sessionStorage.setItem('settings', fs.readFileSync('./settings.json').toString());
-    sessionStorage.setItem('dir', JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root)
+    sessionStorage.setItem(
+      'dir',
+      JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root
+    );
 
     // Needs to set storage and render page is safety
 
