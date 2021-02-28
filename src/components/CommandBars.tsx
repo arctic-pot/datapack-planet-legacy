@@ -13,6 +13,7 @@ import {
 import React, { FormEvent, PropsWithChildren, useState } from 'react';
 import SettingsPanel from './SettingsPanel';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
+import createFileByNsId, { TFileType } from '../file/createFileByNsId';
 
 export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedComponentProps>) {
   const { intl } = props;
@@ -23,7 +24,7 @@ export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedC
   /* eslint-disable @typescript-eslint/no-unused-vars */
   const [id, setId] = useState<string>('');
   const [tagType, setTagType] = useState<string>('');
-  const [type, setType] = useState<string>('');
+  const [type, setType] = useState<string>('functions');
   /* eslint-enable */
   const [prefix, setPrefix] = useState<string>(undefined);
 
@@ -40,7 +41,7 @@ export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedC
 
   function createHandler() {
     setNewDialogHidden(true);
-    // TODO 2021/2/6 should have a public create file fn
+    createFileByNsId(sessionStorage.getItem('dir'), type as TFileType, id)
   }
 
   return (

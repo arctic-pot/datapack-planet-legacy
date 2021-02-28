@@ -4,6 +4,7 @@ import path from 'path';
 import glob from 'glob';
 import FileList from './FileList';
 import './Body.scss';
+import watch from 'node-watch';
 
 interface IGroupFormat {
   key: string;
@@ -18,13 +19,15 @@ interface IItemFormat {
   dir: string;
 }
 
+let shouldWatch = true;
+
 export default function Body(): JSX.Element {
   const filePath = path.resolve(
-    JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root,
+    sessionStorage.getItem('dir'),
     './data'
   );
-  const [items] = useState<IItemFormat[]>(_getFileListItems());
-  const [groups] = useState<IGroupFormat[]>(_getGroups());
+  const [items, setItems] = useState<IItemFormat[]>(_getFileListItems());
+  const [groups, setGroups] = useState<IGroupFormat[]>(_getGroups());
 
   function _getFileListItems(): Array<IItemFormat> {
     function generateType(pathname: string): IItemFormat {
@@ -76,7 +79,7 @@ export default function Body(): JSX.Element {
       tags = 0,
       functions = 0;
 
-    items.forEach((item: IItemFormat) => {
+    _getFileListItems().forEach((item: IItemFormat) => {
       if (item.type === 'advancements') advancements += 1;
       if (item.type === 'functions') functions += 1;
       if (item.type === 'dimension') dimensions += 1;
@@ -139,6 +142,28 @@ export default function Body(): JSX.Element {
     );
     console.log(tags);
     return validGroups;
+  }
+
+  if (shouldWatch) {
+    watch(
+      filePath,
+      {
+        recursive: true,
+        filter: (file: string, skip: symbol) => {
+          if (file.match(/\.(mcfunction|json)$/)) {
+            return true;
+          } else {
+            return skip;
+          }
+        },
+      },
+      (evt: never, name) => {
+        console.log('%s changed.', name);
+        setGroups(_getGroups());
+        setItems(_getFileListItems());
+        shouldWatch = false
+      }
+    );
   }
 
   return (

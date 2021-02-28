@@ -95,6 +95,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "glob": "^7.1.6",
     "jquery": "^3.5.1",
+    "node-watch": "^0.7.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-intl": "^5.12.3"
