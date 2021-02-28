@@ -10,5 +10,10 @@ export default function createFileByNsId(base: string, type: TFileType, nsId: st
     type === 'functions' ? 'mc' + 'function' : 'json'
   }`;
   // Write file to create
-  fs.writeFileSync(path.resolve(base, filePath), Buffer.from(''));
+  try {
+    fs.writeFileSync(path.resolve(base, filePath), Buffer.from(''));
+  } catch (e: unknown) {
+    fs.mkdirSync(path.resolve(base, `./data/${namespace}/${type}`), { recursive: true });
+    fs.writeFileSync(path.resolve(base, filePath), Buffer.from(''));
+  }
 }

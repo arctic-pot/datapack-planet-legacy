@@ -136,28 +136,19 @@ export default function Body(): JSX.Element {
     const validGroups = [group1, group2, group3, group4, group5, group6].filter(
       (group: IGroupFormat) => !!group
     );
-    console.log(tags);
     return validGroups;
   }
 
   if (shouldWatch) {
+    shouldWatch = false;
     watch(
       filePath,
       {
         recursive: true,
-        filter: (file: string, skip: symbol) => {
-          if (file.match(/\.(mcfunction|json)$/)) {
-            return true;
-          } else {
-            return skip;
-          }
-        },
       },
-      (evt: never, name) => {
-        console.log('%s changed.', name);
+      () => {
         setGroups(_getGroups());
         setItems(_getFileListItems());
-        shouldWatch = false;
       }
     );
   }
