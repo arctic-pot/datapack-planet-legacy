@@ -141,16 +141,10 @@ export default function Body(): JSX.Element {
 
   if (shouldWatch) {
     shouldWatch = false;
-    watch(
-      filePath,
-      {
-        recursive: true,
-      },
-      () => {
-        setGroups(_getGroups());
-        setItems(_getFileListItems());
-      }
-    );
+    watch(filePath, { recursive: true }, () => {
+      setGroups(_getGroups());
+      setItems(_getFileListItems());
+    });
   }
 
   return (
