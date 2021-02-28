@@ -4,13 +4,7 @@ import glob from 'glob';
 import FileList from './FileList';
 import './Body.scss';
 import watch from 'node-watch';
-
-interface IGroupFormat {
-  key: string;
-  name: string;
-  startIndex: number;
-  count: number;
-}
+import { IGroup } from '@fluentui/react'
 
 interface IItemFormat {
   type: string;
@@ -23,7 +17,7 @@ let shouldWatch = true;
 export default function Body(): JSX.Element {
   const filePath = path.resolve(sessionStorage.getItem('dir'), './data');
   const [items, setItems] = useState<IItemFormat[]>(_getFileListItems());
-  const [groups, setGroups] = useState<IGroupFormat[]>(_getGroups());
+  const [groups, setGroups] = useState<IGroup[]>(_getGroups());
 
   function _getFileListItems(): Array<IItemFormat> {
     function generateType(pathname: string): IItemFormat {
@@ -84,7 +78,7 @@ export default function Body(): JSX.Element {
       if (item.type === 'tags') tags += 1;
     });
 
-    const group1: IGroupFormat = advancements
+    const group1: IGroup = advancements
       ? {
           key: 'group1',
           name: 'Advancements',
@@ -92,7 +86,7 @@ export default function Body(): JSX.Element {
           count: advancements,
         }
       : undefined;
-    const group2: IGroupFormat = dimensions
+    const group2: IGroup = dimensions
       ? {
           key: 'group2',
           name: 'Dimensions',
@@ -100,7 +94,7 @@ export default function Body(): JSX.Element {
           count: dimensions,
         }
       : undefined;
-    const group3: IGroupFormat = dimensionTypes
+    const group3: IGroup = dimensionTypes
       ? {
           key: 'group3',
           name: 'Dimension Types',
@@ -108,7 +102,7 @@ export default function Body(): JSX.Element {
           count: dimensionTypes,
         }
       : undefined;
-    const group4: IGroupFormat = functions
+    const group4: IGroup = functions
       ? {
           key: 'group4',
           name: 'Functions',
@@ -116,7 +110,7 @@ export default function Body(): JSX.Element {
           count: functions,
         }
       : undefined;
-    const group5: IGroupFormat = lootTables
+    const group5: IGroup = lootTables
       ? {
           key: 'group5',
           name: 'Loot Tables',
@@ -124,7 +118,7 @@ export default function Body(): JSX.Element {
           count: lootTables,
         }
       : undefined;
-    const group6: IGroupFormat = tags
+    const group6: IGroup = tags
       ? {
           key: 'group6',
           name: 'Tags',
@@ -134,7 +128,7 @@ export default function Body(): JSX.Element {
       : undefined;
 
     return [group1, group2, group3, group4, group5, group6].filter(
-      (group: IGroupFormat) => !!group
+      (group: IGroup) => !!group
     );
   }
 

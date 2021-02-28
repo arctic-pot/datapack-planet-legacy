@@ -53,6 +53,7 @@ export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedC
             text: intl.formatMessage({ id: 'actions.new' }),
             iconProps: { iconName: 'Add' },
             onClick: () => {
+              setType('functions')
               setNewDialogHidden(false);
               setSelectingTag(false);
               setPrefix(undefined);
