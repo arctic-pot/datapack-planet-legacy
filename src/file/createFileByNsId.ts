@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 
 export type TFileType = 'functions' | 'loot_tables' | 'advancements' | 'recipes' | 'predicates';
@@ -11,13 +11,11 @@ export default function createFileByNsId(base: string, type: TFileType, nsId: st
   }`;
   // Write file to create
   try {
-    fs.writeFileSync(path.resolve(base, filePath), Buffer.from(''));
+    fs.ensureFileSync(path.resolve(base, filePath));
   } catch (e: unknown) {
     const pathExcludeFile = pathTo.split(/\//g);
     pathExcludeFile.pop();
-    fs.mkdirSync(path.resolve(base, `./data/${namespace}/${type}/${pathExcludeFile.join('/')}`), {
-      recursive: true,
-    });
-    fs.writeFileSync(path.resolve(base, filePath), Buffer.from(''));
+    fs.ensureDirSync(path.resolve(base, `./data/${namespace}/${type}/${pathExcludeFile.join('/')}`));
+    fs.ensureFileSync(path.resolve(base, filePath));
   }
 }
