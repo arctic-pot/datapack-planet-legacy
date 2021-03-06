@@ -13,7 +13,11 @@ export default function createFileByNsId(base: string, type: TFileType, nsId: st
   try {
     fs.writeFileSync(path.resolve(base, filePath), Buffer.from(''));
   } catch (e: unknown) {
-    fs.mkdirSync(path.resolve(base, `./data/${namespace}/${type}`), { recursive: true });
+    const pathExcludeFile = pathTo.split(/\//g);
+    pathExcludeFile.pop();
+    fs.mkdirSync(path.resolve(base, `./data/${namespace}/${type}/${pathExcludeFile.join('/')}`), {
+      recursive: true,
+    });
     fs.writeFileSync(path.resolve(base, filePath), Buffer.from(''));
   }
 }
