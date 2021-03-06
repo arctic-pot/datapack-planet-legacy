@@ -4,7 +4,7 @@ import glob from 'glob';
 import FileList from './FileList';
 import './Body.scss';
 import watch from 'node-watch';
-import { IGroup } from '@fluentui/react'
+import { IGroup } from '@fluentui/react';
 
 interface IItemFormat {
   type: string;
@@ -127,9 +127,7 @@ export default function Body(): JSX.Element {
         }
       : undefined;
 
-    return [group1, group2, group3, group4, group5, group6].filter(
-      (group: IGroup) => !!group
-    );
+    return [group1, group2, group3, group4, group5, group6].filter((group: IGroup) => !!group);
   }
 
   if (shouldWatch) {
