@@ -1,5 +1,11 @@
+@import '../index';
 div.body {
   height: calc( 100% - 44px );
+  transform: translate(0, 0);
+}
+
+.ms-Layer.ms-Layer--fixed {
+  top: $menubar-height;
 }
 
 div.body-col {
