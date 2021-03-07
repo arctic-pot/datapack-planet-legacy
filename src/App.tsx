@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { initializeIcons } from '@fluentui/react';
 import CommandsBar from './components/CommandBars';
 import Body from './components/Body';
@@ -18,9 +18,16 @@ if (!sessionStorage.getItem('loaded')) {
 }
 
 function App(): JSX.Element {
+  // This array stores namespace Id
+  const [openingTabs, setOpeningTabs] = useState<Array<string>>([]);
+  const [, setSelectingTab] = useState<number>(0);
+
   return (
     <IntlProvider messages={messages} locale={locale}>
-      <CommandsBar />
+      <CommandsBar
+        openingTabsState={[openingTabs, setOpeningTabs]}
+        selectingTabState={[null, setSelectingTab]}
+      />
       <Body />
     </IntlProvider>
   );

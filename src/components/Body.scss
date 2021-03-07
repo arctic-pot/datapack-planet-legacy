@@ -6,6 +6,7 @@ div.body {
 
 .ms-Layer.ms-Layer--fixed {
   top: $menubar-height;
+  height: calc( 100% - 30px );
 }
 
 div.body-col {

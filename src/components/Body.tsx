@@ -6,7 +6,7 @@ import './Body.scss';
 import watch from 'node-watch';
 import { IGroup } from '@fluentui/react';
 
-interface IItemFormat {
+export interface IItemFormat {
   type: string;
   name: string;
   dir: string;

@@ -15,7 +15,9 @@ export default function createFileByNsId(base: string, type: TFileType, nsId: st
   } catch (e: unknown) {
     const pathExcludeFile = pathTo.split(/\//g);
     pathExcludeFile.pop();
-    fs.ensureDirSync(path.resolve(base, `./data/${namespace}/${type}/${pathExcludeFile.join('/')}`));
+    fs.ensureDirSync(
+      path.resolve(base, `./data/${namespace}/${type}/${pathExcludeFile.join('/')}`)
+    );
     fs.ensureFileSync(path.resolve(base, filePath));
   }
 }

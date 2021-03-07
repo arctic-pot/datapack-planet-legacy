@@ -8,15 +8,22 @@ import {
   IDropdownOption,
   Label,
   PrimaryButton,
-  TextField,
+  TextField
 } from '@fluentui/react';
 import React, { FormEvent, PropsWithChildren, useState } from 'react';
 import SettingsPanel from './SettingsPanel';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import createFileByNsId, { TFileType } from '../file/createFileByNsId';
 
-export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedComponentProps>) {
-  const { intl } = props;
+interface ICommandbarProps extends PropsWithChildren<WrappedComponentProps> {
+  openingTabsState: [Array<string>, React.Dispatch<React.SetStateAction<string[]>>];
+  selectingTabState: [void, React.Dispatch<React.SetStateAction<number>>];
+}
+
+export default injectIntl(function CommandsBar(props: ICommandbarProps) {
+  const { intl, openingTabsState, selectingTabState } = props;
+  const [openingTabs, setOpeningTabs] = openingTabsState;
+  const [, setSelectingTab] = selectingTabState;
   const [newDialogHidden, setNewDialogHidden] = useState<boolean>(true);
   const [settingsShow, setSettingsShow] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -42,6 +49,13 @@ export default injectIntl(function CommandsBar(props: PropsWithChildren<WrappedC
   function createHandler() {
     setNewDialogHidden(true);
     createFileByNsId(sessionStorage.getItem('dir'), type as TFileType, id);
+    const _openingTabs = openingTabs;
+    // State update delay will cause it is not latest value
+    if (!openingTabs.includes(id)) {
+      _openingTabs.push(id);
+      setOpeningTabs(_openingTabs);
+    }
+    setSelectingTab(_openingTabs.indexOf(id));
   }
 
   return (
