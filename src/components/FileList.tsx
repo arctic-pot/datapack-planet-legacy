@@ -1,5 +1,5 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { DetailsList, ContextualMenu, SelectionMode, IGroup } from '@fluentui/react';
+import React from 'react';
+import { DetailsList, IGroup, SelectionMode } from '@fluentui/react';
 
 interface IItemFormat {
   type: string;
