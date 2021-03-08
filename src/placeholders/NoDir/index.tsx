@@ -1,18 +1,19 @@
 import React from 'react';
 import { DefaultButton, Label } from '@fluentui/react';
 import electron from 'electron';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 
 function select() {
-  const settings = JSON.parse(fs.readFileSync('./settings.json').toString());
+  const settings = fs.readJsonSync('./settings.json');
   const selected = electron.remote.dialog.showOpenDialogSync({
     properties: ['openDirectory', 'dontAddToRecent', 'createDirectory'],
   });
   if (selected) {
     settings.directories.root = path.resolve(selected[0]);
-    fs.writeFileSync('./settings.json', Buffer.from(JSON.stringify(settings, null, 4)));
-    location.reload();
+    fs.writeJson('./settings.json', settings, { spaces: 4 }).then(() => {
+      location.reload();
+    });
   }
 }
 

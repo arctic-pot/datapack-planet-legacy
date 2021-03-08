@@ -3,24 +3,24 @@ import React from 'react';
 import './index.scss';
 import '@fluentui/styles';
 import App from './AppContent';
-import fs from 'fs';
+import fs from 'fs-extra';
 import NoDir from './placeholders/NoDir';
 import locales from './locale';
 import LoadingApp from './placeholders/LoadingApp';
+
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-fs.access('./settings.json', (err) => {
-  if (err) {
-    fs.writeFileSync(
-      './settings.json',
-      JSON.stringify({
-        lang: 'en',
-        directories: {
-          root: null,
-        },
-      })
-    );
-  }
+fs.access('./settings.json').catch(() => {
+  fs.writeJsonSync(
+    './settings.json',
+    {
+      lang: 'en',
+      directories: {
+        root: null,
+      },
+    },
+    { spaces: 4 }
+  );
 });
 
 // Load page before loaded
@@ -28,14 +28,11 @@ ReactDOM.render(React.createElement(LoadingApp), document.getElementById('root')
 
 // Using a timeout to making effect and be sure the application will keep running
 setTimeout(() => {
-  fs.readFile('./settings.json', (err: Error | null, data: Buffer) => {
-    sessionStorage.setItem('language', JSON.parse(data.toString()).lang);
-    sessionStorage.setItem('messages', JSON.stringify(locales[JSON.parse(data.toString()).lang]));
-    sessionStorage.setItem('settings', fs.readFileSync('./settings.json').toString());
-    sessionStorage.setItem(
-      'dir',
-      JSON.parse(fs.readFileSync('./settings.json').toString()).directories.root
-    );
+  fs.readJson('./settings.json').then((data) => {
+    sessionStorage.setItem('language', data.lang);
+    sessionStorage.setItem('messages', JSON.stringify(locales[data.lang]));
+    sessionStorage.setItem('settings', JSON.stringify(data));
+    sessionStorage.setItem('dir', data.directories.root);
 
     // Needs to set storage and render page is safety
 
@@ -44,7 +41,7 @@ setTimeout(() => {
     // correctly appear on the page
 
     setTimeout(() => {
-      if (JSON.parse(data.toString()).directories.root === null) {
+      if (data.directories.root === null) {
         console.error('Err: no directory selected');
         ReactDOM.render(React.createElement(NoDir), document.getElementById('root'));
       } else {
