@@ -48,11 +48,13 @@ export default function Body(): JSX.Element {
 
     const fileList: Array<IItemFormat> = [];
     [...JSONSchemas, ...MCFunctions].forEach((item: string) => fileList.push(generateType(item)));
+    // Sort with file name
     fileList.sort((a, b) => {
       if (a.name < b.name) return -1;
       if (a.name > b.name) return 1;
       if (a.name > b.name) return 0;
     });
+    // Sort with type
     fileList.sort((a, b) => {
       if (a.type < b.type) return -1;
       if (a.type > b.type) return 1;
@@ -78,6 +80,7 @@ export default function Body(): JSX.Element {
       if (item.type === 'tags') tags += 1;
     });
 
+    // those groups are its id
     const group1: IGroup = advancements
       ? {
           key: 'group1',
@@ -127,15 +130,17 @@ export default function Body(): JSX.Element {
         }
       : undefined;
 
+    // If no item in group, it will be filter off
     return [group1, group2, group3, group4, group5, group6].filter((group: IGroup) => !!group);
   }
 
   if (shouldWatch) {
-    shouldWatch = false;
     watch(filePath, { recursive: true }, () => {
       setGroups(_getGroups());
       setItems(_getFileListItems());
     });
+    // the file should just watch once
+    shouldWatch = false;
   }
 
   return (
