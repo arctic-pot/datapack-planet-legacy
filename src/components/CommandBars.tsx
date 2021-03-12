@@ -28,11 +28,11 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
   const [settingsShow, setSettingsShow] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [selectingTag, setSelectingTag] = useState<boolean>(false);
-  /* eslint-disable @typescript-eslint/no-unused-vars */
   const [id, setId] = useState<string>('');
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const [tagType, setTagType] = useState<string>('');
-  const [type, setType] = useState<string>('functions');
   /* eslint-enable */
+  const [type, setType] = useState<string>('functions');
   const [prefix, setPrefix] = useState<string>(undefined);
 
   function typeSelectorChangeHandler(_e: React.FormEvent<HTMLDivElement>, item: IDropdownOption) {
