@@ -8,7 +8,7 @@ import {
   IDropdownOption,
   Label,
   PrimaryButton,
-  TextField
+  TextField,
 } from '@fluentui/react';
 import React, { FormEvent, PropsWithChildren, useState } from 'react';
 import SettingsPanel from './SettingsPanel';
