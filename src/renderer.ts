@@ -47,6 +47,6 @@ setTimeout(() => {
       } else {
         ReactDOM.render(App, document.getElementById('root'));
       }
-    }, 500);
+    }, 100);
   });
-}, 300);
+}, 100);
