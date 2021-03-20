@@ -74,11 +74,6 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
             },
           },
           {
-            key: 'save',
-            text: intl.formatMessage({ id: 'actions.save' }),
-            iconProps: { iconName: 'Save' },
-          },
-          {
             key: 'open',
             text: intl.formatMessage({ id: 'actions.open' }),
             iconProps: { iconName: 'FolderOpen' },
