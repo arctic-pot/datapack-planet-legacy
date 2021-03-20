@@ -21,6 +21,18 @@ export default {
   'dialog.createFile.tagType': 'Select the type of the tag',
   'dialog.createFile.title': 'Create File',
   'dialog.createFile.desc': 'Create a new file and open editor. You should not add file extension.',
+
+  'arg.type.entity': 'entity',
+  'arg.type.player': 'player',
+  'arg.type.pos2d': '2D coordinates',
+  'arg.type.pos3d': '3D coordinates',
+  'arg.type.rotation': 'rotation coordinates',
+  'arg.type.int': 'int',
+  'arg.type.float': 'float',
+  'arg.type.double': 'double',
+  'arg.type.item': 'item',
+  'arg.type.id': 'namespaced identifier',
+
   'err.mc.slash': 'No slash should be exist in data pack',
   'err.mc.command': 'Unknown command',
   'err.mc.type': 'Invalid NBT value type, expected type is { expected }',
@@ -32,6 +44,7 @@ export default {
   'err.mc.incomplete.rotation': 'Incomplete rotation, expected 2 coordinates',
   'err.mc.pos.outofworld': 'That position is out of this world',
   'err.mc.pos.mixed': 'Cannot mix world & local coordinates',
+  'err.mc.exceed.entity': 'Expected only one entity but the selector could select entities that exceed the limit',
   'err.json.type': 'Invalid value type, expected type is { expected }',
   'err.json.key': "Don't know key { key } in JSON schemas",
 };
