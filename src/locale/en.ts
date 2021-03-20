@@ -44,7 +44,8 @@ export default {
   'err.mc.incomplete.rotation': 'Incomplete rotation, expected 2 coordinates',
   'err.mc.pos.outofworld': 'That position is out of this world',
   'err.mc.pos.mixed': 'Cannot mix world & local coordinates',
-  'err.mc.exceed.entity': 'Expected only one entity but the selector could select entities that exceed the limit',
+  'err.mc.exceed.entity':
+    'Expected only one entity but the selector could select entities that exceed the limit',
   'err.json.type': 'Invalid value type, expected type is { expected }',
   'err.json.key': "Don't know key { key } in JSON schemas",
 };
