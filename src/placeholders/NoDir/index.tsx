@@ -1,21 +1,6 @@
 import React from 'react';
 import { DefaultButton, Label } from '@fluentui/react';
-import electron from 'electron';
-import fs from 'fs-extra';
-import path from 'path';
-
-function select() {
-  const settings = fs.readJsonSync('./settings.json');
-  const selected = electron.remote.dialog.showOpenDialogSync({
-    properties: ['openDirectory', 'dontAddToRecent', 'createDirectory'],
-  });
-  if (selected) {
-    settings.directories.root = path.resolve(selected[0]);
-    fs.writeJson('./settings.json', settings, { spaces: 4 }).then(() => {
-      location.reload();
-    });
-  }
-}
+import selectWorkSpace from '../../utils/selectWorkSpace';
 
 export default function NoDir(): JSX.Element {
   return (
@@ -33,7 +18,7 @@ export default function NoDir(): JSX.Element {
       <Label>You have not selected any workspace</Label>
       <div>&nbsp;</div>
       <div>
-        <DefaultButton onClick={select}>Select an existing DataPack</DefaultButton>
+        <DefaultButton onClick={selectWorkSpace}>Select an existing DataPack</DefaultButton>
         &nbsp;or&nbsp;
         <DefaultButton disabled>Create a DataPack</DefaultButton>
       </div>
