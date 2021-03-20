@@ -3,12 +3,14 @@ indent_style = space
 
 [{*.ts, *.tsx}]
 indent_size = 2
+end_of_line = lf
 # IntelliJ Settings
 ij_typescript_use_double_quotes = false
 ij_typescript_force_quote_style = true
 
 [{*.js, *.jsx}]
 indent_size = 2
+end_of_line = lf
 ij_javascript_use_double_quotes = false
 ij_javascript_force_quote_style = true
 
