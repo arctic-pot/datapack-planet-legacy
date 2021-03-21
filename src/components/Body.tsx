@@ -23,7 +23,7 @@ export default function Body(): JSX.Element {
   function _getFileListItems(): Array<IItemFormat> {
     function generateType(pathname: string): IItemFormat {
       const typeList = pathname.match(
-        /functions|advancements|recipes|loot_tables|predicates|tags/g
+        /(functions|advancements|recipes|loot_tables|predicates|tags)/g
       );
       const nameList = pathname.match(
         /.*\/(functions|advancements|recipes|loot_tables|predicates|tags)\/(.*\/)?.*\./g

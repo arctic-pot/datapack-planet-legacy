@@ -12,6 +12,7 @@ export default {
   'actions.delete': 'Delete',
   'actions.deleteNamespace': 'Delete whole namespace',
   'actions.trash': 'Move to trash bin',
+  'actions.trashOpen': 'Open trash bin',
   'actions.explorerOpen': 'Open with explorer',
   'actions.pathRelative': 'Copy relative path',
   'actions.pathAbsolute': 'Copy absolute path',

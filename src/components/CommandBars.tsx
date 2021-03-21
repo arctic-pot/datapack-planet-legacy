@@ -14,6 +14,7 @@ import React, { FormEvent, PropsWithChildren, useState } from 'react';
 import SettingsPanel from './SettingsPanel';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import createFileByNsId, { TFileType } from '../file/createFileByNsId';
+import TrashBinView from './TrashBinView';
 
 interface ICommandbarProps extends PropsWithChildren<WrappedComponentProps> {
   openingTabsState: [Array<string>, React.Dispatch<React.SetStateAction<string[]>>];
@@ -34,6 +35,7 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
   /* eslint-enable */
   const [type, setType] = useState<string>('functions');
   const [prefix, setPrefix] = useState<string>(undefined);
+  const [trashPanelShow, setTrashPanelShow] = useState<boolean>(false);
 
   function typeSelectorChangeHandler(_e: React.FormEvent<HTMLDivElement>, item: IDropdownOption) {
     if (item.key === 'tags') {
@@ -87,6 +89,15 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
           },
         ]}
         farItems={[
+          {
+            key: 'trashBin',
+            text: intl.formatMessage({ id: 'actions.trashOpen' }),
+            iconProps: { iconName: 'Trash' },
+            iconOnly: true,
+            onClick: () => {
+              setTrashPanelShow(true);
+            },
+          },
           {
             key: 'setting',
             text: 'Settings',
@@ -206,6 +217,7 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
         </DialogFooter>
       </Dialog>
       <SettingsPanel show={settingsShow} setStateFn={setSettingsShow} />
+      <TrashBinView show={trashPanelShow} onDismiss={() => setTrashPanelShow(false)} />
     </>
   );
 });

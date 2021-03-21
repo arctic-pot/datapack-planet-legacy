@@ -9,8 +9,8 @@ import {
 } from '@fluentui/react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import * as electron from 'electron';
-import path from 'path';
 import { IItemFormat } from './Body';
+import fs from 'fs-extra';
 
 interface IFileListProps extends PropsWithChildren<WrappedComponentProps> {
   items: IItemFormat[];
@@ -23,6 +23,40 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
   const [contextMenuItem, setContextMenuItem] = useState<IItemFormat>();
   const positionRef = useRef();
   const { intl } = props;
+  const handleItemClick = (e: React.MouseEvent<HTMLElement>, item: IContextualMenuItem) => {
+    switch (item.key) {
+      case 'explorer':
+        electron.shell.showItemInFolder(contextMenuItem.dir);
+        break;
+      case 'open':
+        electron.shell.openPath(contextMenuItem.dir).then();
+        break;
+      case 'path':
+        electron.clipboard.clear();
+        electron.clipboard.writeText(contextMenuItem.dir);
+        break;
+      case 'pathRelative':
+        electron.clipboard.clear();
+        electron.clipboard.writeText(contextMenuItem.dirR);
+        break;
+      case 'delete':
+        fs.removeSync(contextMenuItem.dir);
+        break;
+      case 'deleteWorkspace':
+        // TODO: Get workspace directory
+        break;
+      case 'trash':
+        fs.readFile(contextMenuItem.dir, 'utf-8').then((data: string) => {
+          fs.outputJsonSync(`./TRASH_BIN/${Date.now().toString(16)}.trash`, {
+            time: Date.now(),
+            content: data,
+            title: contextMenuItem.name,
+            type: contextMenuItem.type
+          });
+        });
+        break;
+    }
+  };
   return (
     <>
       <div
@@ -71,11 +105,12 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
             iconProps: { iconName: 'Rename' },
           },
           {
-            key: 'delete',
-            text: intl.formatMessage({ id: 'actions.delete' }),
+            key: 'trash',
+            text: intl.formatMessage({ id: 'actions.trash' }),
             iconProps: { iconName: 'Delete' },
             split: true,
             subMenuProps: {
+              onItemClick: handleItemClick,
               items: [
                 {
                   key: 'deleteWorkspace',
@@ -86,11 +121,6 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
                   key: 'delete',
                   text: intl.formatMessage({ id: 'actions.delete' }),
                   iconProps: { iconName: 'Delete' },
-                },
-                {
-                  key: 'trash',
-                  text: intl.formatMessage({ id: 'actions.trash' }),
-                  iconProps: { iconName: 'RecycleBin' },
                 },
               ],
             },
@@ -123,24 +153,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
         onDismiss={() => {
           setShowMenu(false);
         }}
-        onItemClick={(e: React.MouseEvent<HTMLElement>, item: IContextualMenuItem) => {
-          switch (item.key) {
-            case 'explorer':
-              electron.shell.openPath(path.resolve(contextMenuItem.dir, '..')).then();
-              break;
-            case 'open':
-              electron.shell.openPath(contextMenuItem.dir).then();
-              break;
-            case 'path':
-              electron.clipboard.clear();
-              electron.clipboard.writeText(contextMenuItem.dir);
-              break;
-            case 'pathRelative':
-              electron.clipboard.clear();
-              electron.clipboard.writeText(contextMenuItem.dirR);
-              break;
-          }
-        }}
+        onItemClick={handleItemClick}
       />
       <DetailsList
         columns={[
