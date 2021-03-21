@@ -10,6 +10,7 @@ export interface IItemFormat {
   type: string;
   name: string;
   dir: string;
+  dirR?: string;
 }
 
 let shouldWatch = true;
@@ -36,6 +37,7 @@ export default function Body(): JSX.Element {
         type: typeList[0],
         name: name,
         dir: path.resolve(filePath, pathname),
+        dirR: pathname,
       };
     }
     const JSONSchemas = glob.sync(
