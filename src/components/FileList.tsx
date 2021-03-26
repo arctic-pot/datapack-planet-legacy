@@ -47,7 +47,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
         break;
       case 'trash':
         fs.readFile(contextMenuItem.dir, 'utf-8').then((data: string) => {
-          fs.outputJsonSync(`./TRASH_BIN/${Date.now().toString(16)}.trash`, {
+          fs.outputJsonSync(`./TRASH_BIN/${Date.now().toString(16)}.v1.trash`, {
             time: Date.now(),
             content: data,
             title: contextMenuItem.name,

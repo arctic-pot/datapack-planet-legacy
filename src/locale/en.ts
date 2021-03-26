@@ -30,6 +30,8 @@ export default {
   'dialog.createFile.tagType': 'Select the type of the tag',
   'dialog.createFile.title': 'Create File',
   'dialog.createFile.desc': 'Create a new file and open editor. You should not add file extension.',
+  'dialog.trash.title': 'Trash bin',
+  'dialog.trash.deleted': 'Deleted at { time }',
 
   'arg.type.entity': 'entity',
   'arg.type.player': 'player',

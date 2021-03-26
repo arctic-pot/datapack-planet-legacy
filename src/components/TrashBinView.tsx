@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 import fs from 'fs-extra';
 import {
   DocumentCard,
@@ -7,6 +7,7 @@ import {
   DocumentCardActivity,
   Panel,
   PrimaryButton,
+  DefaultButton,
 } from '@fluentui/react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import os from 'os';
@@ -32,7 +33,10 @@ export default injectIntl(function TrashBinView(props: TrashBinViewProps): JSX.E
             <DocumentCardDetails>
               <DocumentCardTitle title={data.title} shouldTruncate />
               <DocumentCardActivity
-                activity={`Deleted at ${intl.formatDate(data.time)}`}
+                activity={intl.formatMessage(
+                  { id: 'dialog.trash.deleted' },
+                  { time: intl.formatDate(data.time) }
+                )}
                 people={[{ name: os.userInfo().username, profileImageSrc: '' }]}
               />
             </DocumentCardDetails>
@@ -41,15 +45,38 @@ export default injectIntl(function TrashBinView(props: TrashBinViewProps): JSX.E
       );
     });
   });
+  if (trashDocs.length === 0) {
+    trashDocs.push(
+      <div
+        style={{ boxSizing: 'border-box', width: '100%', textAlign: 'center', marginTop: 50 }}
+        key="TrashBinNoAnyFile"
+      >
+        Your trash bin is very clear :)
+      </div>
+    );
+  }
   return (
     <Panel
       isLightDismiss
       isOpen={show}
       onDismiss={onDismiss}
-      headerText="Trash Bin"
-      onRenderFooter={(): JSX.Element => {
-        return <PrimaryButton onClick={onDismiss}>Empty trash bin</PrimaryButton>;
-      }}
+      headerText={intl.formatMessage({ id: 'dialog.trash.title' })}
+      onRenderFooter={useCallback((): JSX.Element => {
+        return (
+          <div style={{ padding: 5 }}>
+            <PrimaryButton
+              styles={{ root: { marginRight: 5 } }}
+              onClick={() => {
+                fs.emptyDirSync('./TRASH_BIN');
+                onDismiss();
+              }}
+            >
+              Delete all items
+            </PrimaryButton>
+            <DefaultButton onClick={onDismiss}>Cancel</DefaultButton>
+          </div>
+        );
+      }, [onDismiss])}
       isFooterAtBottom
     >
       {trashDocs}
