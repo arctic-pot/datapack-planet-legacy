@@ -30,9 +30,20 @@ ReactDOM.render(React.createElement(LoadingApp), document.getElementById('root')
 setTimeout(() => {
   fs.readJson('./settings.json').then((data) => {
     sessionStorage.setItem('language', data.lang);
-    sessionStorage.setItem('messages', JSON.stringify(locales[data.lang]));
     sessionStorage.setItem('settings', JSON.stringify(data));
     sessionStorage.setItem('dir', data.directories.root);
+    const keys = Object.keys;
+    if (keys(locales[data.lang]).length < keys(locales['en']).length) {
+      sessionStorage.setItem(
+        'messages',
+        JSON.stringify({
+          ...locales['en'],
+          ...locales[data.lang],
+        })
+      );
+      sessionStorage.setItem('missingMessages', String(true));
+    }
+    sessionStorage.setItem('messages', JSON.stringify(locales[data.lang]));
 
     // Needs to set storage and render page is safety
 
