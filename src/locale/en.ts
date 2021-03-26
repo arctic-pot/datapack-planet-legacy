@@ -32,6 +32,12 @@ export default {
   'dialog.createFile.desc': 'Create a new file and open editor. You should not add file extension.',
   'dialog.trash.title': 'Trash bin',
   'dialog.trash.deleted': 'Deleted at { time }',
+  'dialog.trash.current': 'At current workspace',
+  'dialog.trash.workspace': 'At workspace { workspace }',
+  'dialog.trash.type': 'This file is one of { type }',
+
+  'settings.appearance': 'Appearance',
+  'settings.exp': 'Experience',
 
   'arg.type.entity': 'entity',
   'arg.type.player': 'player',

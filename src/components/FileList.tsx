@@ -51,7 +51,8 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
             time: Date.now(),
             content: data,
             title: contextMenuItem.name,
-            type: contextMenuItem.type
+            type: contextMenuItem.type,
+            workspace: sessionStorage.getItem('dir'),
           });
         });
         break;
