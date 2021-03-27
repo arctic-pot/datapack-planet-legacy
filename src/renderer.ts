@@ -7,6 +7,16 @@ import fs from 'fs-extra';
 import NoDir from './placeholders/NoDir';
 import locales from './locale';
 import LoadingApp from './placeholders/LoadingApp';
+import $ from 'jquery';
+
+$('#close-workspace-button').on('click', () => {
+  fs.readJson('./settings.json').then((_data) => {
+    const data = _data;
+    data.directories.root = null;
+    fs.writeJsonSync('./settings.json', data);
+    location.reload();
+  });
+});
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
@@ -28,6 +38,7 @@ ReactDOM.render(React.createElement(LoadingApp), document.getElementById('root')
 
 // Using a timeout to making effect and be sure the application will keep running
 setTimeout(() => {
+  fs.ensureDir('./TRASH_BIN').then();
   fs.readJson('./settings.json').then((data) => {
     sessionStorage.setItem('language', data.lang);
     sessionStorage.setItem('settings', JSON.stringify(data));

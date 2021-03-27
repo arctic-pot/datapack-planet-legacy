@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <title>DataPack Planet</title>
@@ -19,10 +19,13 @@
         id="minimize-button"
         onclick="require('electron').ipcRenderer.send('minimize')"
       >
-        <i class="ms-Icon ms-Icon--ChromeMinimize"></i>
+        <i class="ms-Icon ms-Icon--ChromeMinimize" aria-hidden="true"></i>
       </button>
       <button class="button" id="refresh-button" onclick="location.reload()">
-        <i class="ms-Icon ms-Icon--Refresh"></i>
+        <i class="ms-Icon ms-Icon--Refresh" aria-hidden="true"></i>
+      </button>
+      <button class="button" id="close-workspace-button">
+        <i class="ms-Icon ms-Icon--ClosePane" aria-hidden="true"></i>
       </button>
     </div>
     <div id="root"></div>
