@@ -28,6 +28,11 @@ fs.access('./settings.json').catch(() => {
       directories: {
         root: null,
       },
+      font: {
+        family: 'monospace',
+        size: 16,
+        ligatures: false,
+      },
     },
     { spaces: 4 }
   );

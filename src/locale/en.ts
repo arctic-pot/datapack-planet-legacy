@@ -36,8 +36,14 @@ export default {
   'dialog.trash.workspace': 'At workspace { workspace }',
   'dialog.trash.type': 'This file is one of { type }',
 
+  'settings.save': 'Save',
+  'settings.cancel': 'Cancel',
   'settings.appearance': 'Appearance',
   'settings.exp': 'Experience',
+  'settings.lang': 'Language',
+  'settings.font': 'Editor font family',
+  'settings.fontSize': 'Editor font size',
+  'settings.fontLigatures': 'Font ligatures',
 
   'arg.type.entity': 'entity',
   'arg.type.player': 'player',
