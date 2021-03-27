@@ -17,14 +17,13 @@ import createFileByNsId, { TFileType } from '../file/createFileByNsId';
 import TrashBinView from './TrashBinView';
 
 interface ICommandbarProps extends PropsWithChildren<WrappedComponentProps> {
-  openingTabsState: [Array<string>, React.Dispatch<React.SetStateAction<string[]>>];
-  selectingTabState: [void, React.Dispatch<React.SetStateAction<number>>];
+  fileHistory: string[];
+  setFileHistory: React.Dispatch<string[]>;
+  setOpeningTab: React.Dispatch<string>;
 }
 
 export default injectIntl(function CommandsBar(props: ICommandbarProps) {
-  const { intl, openingTabsState, selectingTabState } = props;
-  const [openingTabs, setOpeningTabs] = openingTabsState;
-  const [, setSelectingTab] = selectingTabState;
+  const { intl, fileHistory, setFileHistory, setOpeningTab } = props;
   const [newDialogHidden, setNewDialogHidden] = useState<boolean>(true);
   const [settingsShow, setSettingsShow] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -51,13 +50,12 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
   function createHandler() {
     setNewDialogHidden(true);
     createFileByNsId(sessionStorage.getItem('dir'), type as TFileType, id);
-    const _openingTabs = openingTabs;
-    // State update delay will cause it is not latest value
-    if (!openingTabs.includes(id)) {
-      _openingTabs.push(id);
-      setOpeningTabs(_openingTabs);
+    if (fileHistory.length > 4) {
+      setFileHistory([`${type}:${id}`, ...fileHistory].slice(0, 5));
+    } else {
+      setFileHistory([`${type}:${id}`, ...fileHistory]);
     }
-    setSelectingTab(_openingTabs.indexOf(id));
+    setOpeningTab(`${type}:${id}`);
   }
 
   return (

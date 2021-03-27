@@ -1,22 +1,26 @@
 @import '../index';
 div.body {
-  height: calc( 100% - 44px );
+  height: calc(100% - 44px);
   transform: translate(0, 0);
+  display: flex;
+  align-content: center;
+  justify-content: center;
 }
 
 .ms-Layer.ms-Layer--fixed {
   top: $menubar-height;
-  height: calc( 100% - 30px );
+  height: calc(100% - 30px);
 }
 
 div.body-col {
-
   // There is a <div> before
   &:nth-child(1) {
     max-width: 300px;
     width: 30%;
     height: 100%;
     overflow-y: auto;
+    margin-right: 1px;
+    border-right: 1px solid #eee;
 
     .ms-FocusZone.ms-DetailsHeader {
       padding: 0;
@@ -28,7 +32,7 @@ div.body-col {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #fff0;
+      background: #ccc4;
       transition-property: all;
       transition-duration: 0.2s;
     }
@@ -37,8 +41,22 @@ div.body-col {
       background: #cccf;
     }
 
+    &:hover::-webkit-scrollbar {
+      width: 5px;
+      background-color: #eee;
+    }
+
     &::-webkit-scrollbar-button {
       display: none;
     }
   }
+  &:nth-child(2) {
+    // Most IDEs do not know what -webkit-fill-available is
+    // noinspection CssInvalidPropertyValue
+    width: -webkit-fill-available;
+  }
+}
+
+#history-tabs * {
+  font-size: 12px !important;
 }

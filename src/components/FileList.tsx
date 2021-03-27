@@ -15,6 +15,9 @@ import fs from 'fs-extra';
 interface IFileListProps extends PropsWithChildren<WrappedComponentProps> {
   items: IItemFormat[];
   groups: IGroup[];
+  setOpeningTab: React.Dispatch<string>;
+  fileHistory: string[];
+  setFileHistory: React.Dispatch<string[]>;
 }
 
 export default injectIntl(function FileList(props: IFileListProps): JSX.Element {
@@ -22,7 +25,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [contextMenuItem, setContextMenuItem] = useState<IItemFormat>();
   const positionRef = useRef();
-  const { intl } = props;
+  const { intl, setOpeningTab, fileHistory, setFileHistory } = props;
   const handleItemClick = (e: React.MouseEvent<HTMLElement>, item: IContextualMenuItem) => {
     switch (item.key) {
       case 'explorer':
@@ -59,7 +62,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
     }
   };
   return (
-    <>
+    <div style={{ height: '-webkit-fill-available' }}>
       <div
         style={{ position: 'fixed', top: position[1] - 60, left: position[0] }}
         ref={positionRef}
@@ -150,6 +153,14 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
         onItemClick={handleItemClick}
       />
       <DetailsList
+        onItemInvoked={(item) => {
+          if (fileHistory.length > 4) {
+            setFileHistory([item.name, ...fileHistory].slice(0, 5));
+          } else {
+            setFileHistory([item.name, ...fileHistory]);
+          }
+          setOpeningTab(item.name);
+        }}
         columns={[
           {
             key: 'col2',
@@ -169,6 +180,6 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
           setContextMenuItem(item);
         }}
       />
-    </>
+    </div>
   );
 });

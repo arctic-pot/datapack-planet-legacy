@@ -19,15 +19,12 @@ if (!sessionStorage.getItem('loaded')) {
 
 function App(): JSX.Element {
   // This array stores namespace Id
-  const [openingTabs, setOpeningTabs] = useState<Array<string>>([]);
-  const [, setSelectingTab] = useState<number>(0);
+  const [fileHistory, setFileHistory] = useState<string[]>([]);
+  const [openingTab, setOpeningTab] = useState<string>(null);
   return (
     <IntlProvider messages={messages} locale={locale}>
-      <CommandsBar
-        openingTabsState={[openingTabs, setOpeningTabs]}
-        selectingTabState={[null, setSelectingTab]}
-      />
-      <Body />
+      <CommandsBar {...{ setOpeningTab, fileHistory, setFileHistory }} />
+      <Body {...{ fileHistory, setFileHistory, openingTab, setOpeningTab }} />
     </IntlProvider>
   );
 }

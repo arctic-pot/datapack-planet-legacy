@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { PropsWithChildren, useState } from 'react';
 import path from 'path';
 import glob from 'glob';
 import FileList from './FileList';
 import './Body.scss';
 import watch from 'node-watch';
 import { IGroup } from '@fluentui/react';
+import EditorView from './EditorView';
 
 export interface IItemFormat {
   type: string;
@@ -13,12 +14,20 @@ export interface IItemFormat {
   dirR?: string;
 }
 
+interface IBodyProps {
+  openingTab: string;
+  setOpeningTab: React.Dispatch<string>;
+  fileHistory: string[];
+  setFileHistory: React.Dispatch<string[]>;
+}
+
 let shouldWatch = true;
 
-export default function Body(): JSX.Element {
+export default function Body(props: PropsWithChildren<IBodyProps>): JSX.Element {
   const filePath = path.resolve(sessionStorage.getItem('dir'), './data');
   const [items, setItems] = useState<IItemFormat[]>(_getFileListItems());
   const [groups, setGroups] = useState<IGroup[]>(_getGroups());
+  const { openingTab, setOpeningTab, fileHistory, setFileHistory } = props;
 
   function _getFileListItems(): Array<IItemFormat> {
     function generateType(pathname: string): IItemFormat {
@@ -148,7 +157,14 @@ export default function Body(): JSX.Element {
   return (
     <div className="body">
       <div className="body-col">
-        <FileList items={items} groups={groups} />
+        <FileList
+          items={items}
+          groups={groups}
+          {...{ setOpeningTab, fileHistory, setFileHistory }}
+        />
+      </div>
+      <div className="body-col">
+        <EditorView {...{ openingTab, setOpeningTab, fileHistory }} />
       </div>
     </div>
   );
