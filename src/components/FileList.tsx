@@ -135,16 +135,9 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
                 {
                   key: '1d5344f93c80fcfe6dce702466cae1e27eef3166',
                   iconProps: {
-                    iconName:
-                      '\u0045\u006D\u006F\u006A\u0069\u0054\u0061' +
-                      '\u0062\u0053\u0079\u006D\u0062\u006F\u006C\u0073',
-                    style: {
-                      color: '\u0023' + 'e' + 2 * 3 + 'a' + 303 / (3 / 2),
-                    },
+                    iconName: 'EmojiNeutral',
                   },
-                  text:
-                    '\u0053\u0061\u0079\u0069\u006E\u0067\u0020\u002A\u0046' +
-                    '\u0055\u0043\u004B\u002A',
+                  text: 'L' + 'OL'.repeat(~~(Math.random() * 25) + 1),
                 },
               ]
             : []),

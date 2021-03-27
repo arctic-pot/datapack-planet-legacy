@@ -27,6 +27,16 @@
       <button class="button" id="close-workspace-button">
         <i class="ms-Icon ms-Icon--ClosePane" aria-hidden="true"></i>
       </button>
+      <div class="button not-clickable"></div>
+      <button
+        class="button"
+        id="egg-button"
+        onclick="
+          sessionStorage.setItem('egg', '3c6b3fc60789adcc9d56110fc2c89c4b');
+          location.reload();
+          new Notification('You triggered a super secret option!');
+        "
+      ></button>
     </div>
     <div id="root"></div>
   </body>

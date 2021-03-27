@@ -17,6 +17,9 @@ $('#close-workspace-button').on('click', () => {
     location.reload();
   });
 });
+if (sessionStorage.getItem('egg')) {
+  $('#egg-button').remove();
+}
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 

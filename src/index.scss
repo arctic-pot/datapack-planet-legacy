@@ -39,8 +39,12 @@ div#menubar {
     cursor: pointer;
     color: $G800;
 
-    &:hover {
+    &:not(.not-clickable):hover {
       background-color: $G300;
+    }
+
+    &.not-clickable {
+      cursor: default;
     }
 
     &.close-button {
