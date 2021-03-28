@@ -50,8 +50,8 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
   function createHandler() {
     setNewDialogHidden(true);
     createFileByNsId(sessionStorage.getItem('dir'), type as TFileType, id);
-    if (fileHistory.length > 4) {
-      setFileHistory([`${type}:${id}`, ...fileHistory].slice(0, 5));
+    if (fileHistory.length > 2) {
+      setFileHistory([`${type}:${id}`, ...fileHistory].slice(0, 3));
     } else {
       setFileHistory([`${type}:${id}`, ...fileHistory]);
     }

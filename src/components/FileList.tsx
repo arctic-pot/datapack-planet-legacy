@@ -155,8 +155,8 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
       <DetailsList
         onItemInvoked={(item) => {
           if (fileHistory[0] != item.name) {
-            if (fileHistory.length > 4) {
-              setFileHistory([item.name, ...fileHistory].slice(0, 5));
+            if (fileHistory.length > 2) {
+              setFileHistory([item.name, ...fileHistory].slice(0, 3));
             } else {
               setFileHistory([item.name, ...fileHistory]);
             }

@@ -25,6 +25,7 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
   });
   if (openingTab) {
     return (
+      // TODO: 2021/3/28 historyTabs will let Stack overflow
       <>
         <Stack horizontal styles={{ root: { height: 30, paddingLeft: 5 } }} id="history-tabs">
           <Label>History</Label>
