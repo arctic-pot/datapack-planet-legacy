@@ -7,23 +7,10 @@ import fs from 'fs-extra';
 import NoDir from './placeholders/NoDir';
 import locales from './locale';
 import LoadingApp from './placeholders/LoadingApp';
-import $ from 'jquery';
 import { initializeIcons } from '@fluentui/react';
 import Menubar from './Menubar';
 
 initializeIcons();
-
-$('#close-workspace-button').on('click', () => {
-  fs.readJson('./settings.json').then((_data) => {
-    const data = _data;
-    data.directories.root = null;
-    fs.writeJsonSync('./settings.json', data);
-    location.reload();
-  });
-});
-if (sessionStorage.getItem('egg')) {
-  $('#egg-button').remove();
-}
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
