@@ -27,34 +27,37 @@ if (sessionStorage.getItem('egg')) {
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-fs.access('./settings.json').catch(() => {
-  fs.writeJsonSync(
-    './settings.json',
-    {
-      lang: 'en',
-      directories: {
-        root: null,
-      },
-      font: {
-        family: 'monospace',
-        size: 16,
-        ligatures: false,
-      },
-    },
-    { spaces: 4 }
-  );
-});
-
-// Load page before loaded
-ReactDOM.render(React.createElement(LoadingApp), document.getElementById('root'));
+// Load menubar at first
 ReactDOM.render(React.createElement(Menubar), document.getElementById('menubar'));
-// Using a timeout to making effect and be sure the application will keep running
-setTimeout(() => {
-  fs.ensureDir('./TRASH_BIN').then();
-  fs.readJson('./settings.json').then((data) => {
+// Add a spinner while app is loading
+ReactDOM.render(React.createElement(LoadingApp), document.getElementById('root'));
+
+fs.access('./settings.json')
+  .catch(() => {
+    fs.writeJsonSync(
+      './settings.json',
+      {
+        lang: 'en',
+        directories: {
+          root: null,
+        },
+        font: {
+          family: 'monospace',
+          size: 16,
+          ligatures: false,
+        },
+      },
+      { spaces: 4 }
+    );
+    return false;
+  })
+  .then(() => fs.ensureDir('./TRASH_BIN'))
+  .then(() => fs.readJson('./settings.json'))
+  .then((data) => {
     sessionStorage.setItem('language', data.lang);
     sessionStorage.setItem('settings', JSON.stringify(data));
     sessionStorage.setItem('dir', data.directories.root);
+    sessionStorage.setItem('messages', JSON.stringify(locales[data.lang]));
     const keys = Object.keys;
     if (keys(locales[data.lang]).length < keys(locales['en']).length) {
       sessionStorage.setItem(
@@ -66,21 +69,13 @@ setTimeout(() => {
       );
       sessionStorage.setItem('missingMessages', String(true));
     }
-    sessionStorage.setItem('messages', JSON.stringify(locales[data.lang]));
-
-    // Needs to set storage and render page is safety
-
-    // Because a UNKNOWN BUG, the session storage can not get in App.tsx
-    // So here we set a timeout to make sure the translation code will
-    // correctly appear on the page
-
-    setTimeout(() => {
-      if (data.directories.root === null) {
-        console.error('Err: no directory selected');
-        ReactDOM.render(React.createElement(NoDir), document.getElementById('root'));
-      } else {
-        ReactDOM.render(React.createElement(App), document.getElementById('root'));
-      }
-    }, 100);
+    return data;
+  })
+  .then((data) => {
+    // Needs to set storage and render page to keep safety
+    if (data.directories.root === null) {
+      ReactDOM.render(React.createElement(NoDir), document.getElementById('root'));
+    } else {
+      ReactDOM.render(React.createElement(App), document.getElementById('root'));
+    }
   });
-}, 100);
