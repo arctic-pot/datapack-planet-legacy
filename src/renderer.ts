@@ -8,6 +8,9 @@ import NoDir from './placeholders/NoDir';
 import locales from './locale';
 import LoadingApp from './placeholders/LoadingApp';
 import $ from 'jquery';
+import { initializeIcons } from '@fluentui/react';
+
+initializeIcons();
 
 $('#close-workspace-button').on('click', () => {
   fs.readJson('./settings.json').then((_data) => {

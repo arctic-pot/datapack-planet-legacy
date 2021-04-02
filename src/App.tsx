@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { initializeIcons } from '@fluentui/react';
 import CommandsBar from './components/CommandBars';
 import Body from './components/Body';
 import { IntlProvider } from 'react-intl';
-
-initializeIcons();
 
 const locale: string = sessionStorage.getItem('locale');
 const messages = JSON.parse(sessionStorage.getItem('messages'));
