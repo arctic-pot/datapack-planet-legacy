@@ -3,45 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>DataPack Planet</title>
-    <link
-      rel="stylesheet"
-      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
-    />
   </head>
   <body>
     <div id="menubar">
-      <div id="icon" class="float-left">DataPack Planet</div>
-      <button
-        class="button"
-        id="close-button"
-        onclick="require('electron').ipcRenderer.send('close')"
-      >
-        <i class="ms-Icon ms-Icon--ChromeClose"></i>
-      </button>
-      <button
-        class="button"
-        id="minimize-button"
-        onclick="require('electron').ipcRenderer.send('minimize')"
-      >
-        <i class="ms-Icon ms-Icon--ChromeMinimize" aria-hidden="true"></i>
-      </button>
-      <button class="button" id="refresh-button" onclick="location.reload()">
-        <i class="ms-Icon ms-Icon--Refresh" aria-hidden="true"></i>
-      </button>
-      <button class="button" id="close-workspace-button">
-        <i class="ms-Icon ms-Icon--ClosePane" aria-hidden="true"></i>
-      </button>
-      <div class="button not-clickable"></div>
-      <button
-        class="button"
-        id="egg-button"
-        onclick="
-          sessionStorage.setItem('egg', '3c6b3fc60789adcc9d56110fc2c89c4b');
-          location.reload();
-          new Notification('You triggered a super secret option!');
-        "
-      ></button>
+      <!-- Menubar.tsx -->
     </div>
-    <div id="root"></div>
+    <div id="root">
+      <!-- App.tsx -->
+    </div>
   </body>
 </html>

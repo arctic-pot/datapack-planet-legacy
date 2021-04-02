@@ -9,6 +9,7 @@ import locales from './locale';
 import LoadingApp from './placeholders/LoadingApp';
 import $ from 'jquery';
 import { initializeIcons } from '@fluentui/react';
+import Menubar from './Menubar';
 
 initializeIcons();
 
@@ -46,7 +47,7 @@ fs.access('./settings.json').catch(() => {
 
 // Load page before loaded
 ReactDOM.render(React.createElement(LoadingApp), document.getElementById('root'));
-
+ReactDOM.render(React.createElement(Menubar), document.getElementById('menubar'));
 // Using a timeout to making effect and be sure the application will keep running
 setTimeout(() => {
   fs.ensureDir('./TRASH_BIN').then();
