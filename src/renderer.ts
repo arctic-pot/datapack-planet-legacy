@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import './index.scss';
 import '@fluentui/styles';
-import App from './AppContent';
+import App from './App';
 import fs from 'fs-extra';
 import NoDir from './placeholders/NoDir';
 import locales from './locale';
@@ -75,7 +75,7 @@ setTimeout(() => {
         console.error('Err: no directory selected');
         ReactDOM.render(React.createElement(NoDir), document.getElementById('root'));
       } else {
-        ReactDOM.render(App, document.getElementById('root'));
+        ReactDOM.render(React.createElement(App), document.getElementById('root'));
       }
     }, 100);
   });
