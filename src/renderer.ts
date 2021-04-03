@@ -17,7 +17,10 @@ console.log('👋 This message is being logged by "renderer.js", included via we
 // Load menubar at first
 ReactDOM.render(React.createElement(Menubar), document.getElementById('menubar'));
 // Add a spinner while app is loading
-ReactDOM.render(React.createElement(LoadingApp), document.getElementById('root'));
+(async () => {
+  // Async operating to avoid stop the main thread
+  ReactDOM.render(React.createElement(LoadingApp), document.getElementById('root'));
+})();
 
 fs.access('./settings.json')
   .catch(() => {
@@ -29,7 +32,7 @@ fs.access('./settings.json')
           root: null,
         },
         font: {
-          family: 'monospace',
+          family: '"Consolas", "Menlo", "monospace", "sans-serif"',
           size: 16,
           ligatures: false,
         },
