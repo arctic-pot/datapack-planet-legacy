@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './TextEditor';
 
 export default function TextEditor(): JSX.Element {
   const [lines, setLines] = useState(<tbody />);
+  const typeReceiverRef = useRef<HTMLInputElement>();
+  const editorRef = useRef<HTMLDivElement>();
   const refreshContent = (content: string) => {
     const contentLines = content.split('\n');
     const _lines: JSX.Element[] = [];
@@ -21,6 +23,17 @@ export default function TextEditor(): JSX.Element {
     refreshContent('Nope!\n'.repeat(100));
   }, []);
 
+  useEffect(() => {
+    const editorElement = editorRef.current;
+    const typeReceiverElement = typeReceiverRef.current;
+    editorElement.addEventListener('click', () => {
+      typeReceiverElement.focus();
+    });
+    typeReceiverElement.addEventListener('keydown', (e: KeyboardEvent) => {
+      e.preventDefault();
+    });
+  }, []);
+
   const settings = JSON.parse(sessionStorage.getItem('settings'));
   const fontStyle: React.CSSProperties = {
     fontSize: settings.font.size,
@@ -29,12 +42,10 @@ export default function TextEditor(): JSX.Element {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <div id="type-receiver-parent">
-        <textarea id="type-receiver" style={fontStyle} />
-      </div>
-      <div id="editor" style={fontStyle}>
+      <div id="editor" style={fontStyle} ref={editorRef}>
         <table>{lines}</table>
       </div>
+      <input id="type-receiver" ref={typeReceiverRef} />
     </div>
   );
 }
