@@ -1,6 +1,6 @@
 import en from './en';
 
-const locales: { [L: string]: { [K: string]: string } } = {
+const locales: Record<string, Record<string, string>> = {
   en,
 };
 
