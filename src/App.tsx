@@ -19,7 +19,7 @@ function App(): JSX.Element {
   const [fileHistory, setFileHistory] = useState<string[]>([]);
   const [openingTab, setOpeningTab] = useState<string>(null);
   return (
-    <IntlProvider messages={messages} locale={locale}>
+    <IntlProvider messages={messages} locale={locale} defaultLocale="en">
       <CommandsBar {...{ setOpeningTab, fileHistory, setFileHistory }} />
       <Body {...{ fileHistory, setFileHistory, openingTab, setOpeningTab }} />
     </IntlProvider>
