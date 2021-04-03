@@ -1,5 +1,6 @@
 import React from 'react';
 import { Breadcrumb, CommandBarButton, Label, Stack } from '@fluentui/react';
+import Editor from './editor/Editor';
 
 interface IEditorViewProps {
   openingTab: string;
@@ -38,7 +39,11 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
               { key: 'namespace', text: openingTabSplit[0] },
               { key: 'name', text: openingTabSplit[1] },
             ]}
+            styles={{ root: { margin: '0' } }}
           />
+        </div>
+        <div style={{ height: '-webkit-fill-available', width: '100%' }}>
+          <Editor />
         </div>
       </>
     );
