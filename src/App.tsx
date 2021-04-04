@@ -3,7 +3,7 @@ import CommandsBar from './components/CommandBars';
 import Body from './components/Body';
 import { IntlProvider } from 'react-intl';
 
-const locale: string = sessionStorage.getItem('locale');
+const locale: string = sessionStorage.getItem('language');
 const messages = JSON.parse(sessionStorage.getItem('messages'));
 
 console.log(sessionStorage.getItem('messages'));
