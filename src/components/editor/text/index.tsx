@@ -3,6 +3,7 @@ import './TextEditor';
 
 export default function TextEditor(): JSX.Element {
   const [lines, setLines] = useState(<tbody />);
+  const [receiverPos, setReceiverPos] = useState([0, 0]);
   const typeReceiverRef = useRef<HTMLInputElement>();
   const editorRef = useRef<HTMLDivElement>();
   const refreshContent = (content: string) => {
@@ -26,11 +27,20 @@ export default function TextEditor(): JSX.Element {
   useEffect(() => {
     const editorElement = editorRef.current;
     const typeReceiverElement = typeReceiverRef.current;
-    editorElement.addEventListener('click', () => {
-      typeReceiverElement.focus();
+    editorElement.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).classList.contains('content')) {
+        typeReceiverElement.focus();
+        setReceiverPos([
+          e.pageX - document.querySelector('.body-col:first-child').clientWidth,
+          e.pageY - 160,
+        ]);
+      }
     });
-    typeReceiverElement.addEventListener('keydown', (e: KeyboardEvent) => {
-      e.preventDefault();
+    typeReceiverElement.addEventListener('input', (e: KeyboardEvent) => {
+      if (!e.isComposing) {
+        // TODO: typing
+      }
+      typeReceiverElement.value = '';
     });
   }, []);
 
@@ -45,7 +55,11 @@ export default function TextEditor(): JSX.Element {
       <div id="editor" style={fontStyle} ref={editorRef}>
         <table>{lines}</table>
       </div>
-      <input id="type-receiver" ref={typeReceiverRef} />
+      <input
+        id="type-receiver"
+        ref={typeReceiverRef}
+        style={{ top: receiverPos[1], left: receiverPos[0] }}
+      />
     </div>
   );
 }

@@ -25,6 +25,10 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
     );
   });
   if (openingTab) {
+    const breadcrumbItems = [{ key: 'namespace', text: openingTabSplit[0] }];
+    openingTabSplit[1].split(/\//g).forEach((path, index) => {
+      breadcrumbItems.push({ key: 'name' + index, text: path });
+    });
     return (
       // TODO: 2021/3/28 historyTabs will let Stack overflow
       <>
@@ -34,13 +38,7 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
           {historyTabs}
         </Stack>
         <div>
-          <Breadcrumb
-            items={[
-              { key: 'namespace', text: openingTabSplit[0] },
-              { key: 'name', text: openingTabSplit[1] },
-            ]}
-            styles={{ root: { margin: '0' } }}
-          />
+          <Breadcrumb items={breadcrumbItems} styles={{ root: { margin: '0' } }} />
         </div>
         <div style={{ height: '-webkit-fill-available', width: '100%' }}>
           <Editor />

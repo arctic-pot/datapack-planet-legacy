@@ -59,6 +59,16 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
           });
         });
         break;
+      case '1d5344f93c80fcfe6dce702466cae1e27eef3166':
+        open(
+          'data:text/plain;base64,ICAgICAgICAgX19fX19fX19fX19fX18KICAgICAg' +
+            'ICAvICAgICAgICAgICAgIC8KICAgICAgIC8gICAgICAgICAgICAgLwogICAgICAvICAgIC' +
+            'AgICAgICAgIC8gIFRISVMgSVMgVEhFIE1BR0lDIExFVFRFUgogICAgIC8gICBnb29nbGUg' +
+            'ICAgLyAgSVQgV1JJVEVTIEFCT1VUIEhPVyBUTyBSRVNPTFZFIFlPVVIgQU5ZIFFVRVNUSU' +
+            '9OCiAgICAvICAgICAgICAgICAgIC8KICAgLyAgICAgICAgICAgICAvCiAgL19fX19f' +
+            'X19fX19fX18v'
+        );
+        break;
     }
   };
   return (
