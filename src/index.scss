@@ -38,11 +38,11 @@ div#menubar {
 
     &:not(.not-clickable):hover {
       background-color: $G300;
-      -webkit-app-region: drag;
     }
 
     &.not-clickable {
       cursor: default;
+      -webkit-app-region: drag;
     }
 
     &.close-button {
