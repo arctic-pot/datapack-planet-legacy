@@ -1,28 +1,48 @@
 import React from 'react';
-import { Breadcrumb, CommandBarButton, Label, Stack } from '@fluentui/react';
+import {
+  Breadcrumb,
+  CommandBar,
+  ICommandBarItemProps,
+  Icon,
+  Text,
+} from '@fluentui/react';
 import Editor from './editor/Editor';
 
 interface IEditorViewProps {
   openingTab: string;
   setOpeningTab: React.Dispatch<string>;
   fileHistory: string[];
+  setFileHistory: React.Dispatch<string[]>;
 }
 
 export default function EditorView(props: IEditorViewProps): JSX.Element {
-  const { openingTab, setOpeningTab, fileHistory } = props;
+  const { openingTab, setOpeningTab, fileHistory, setFileHistory } = props;
   const openingTabSplit: string[] = openingTab ? openingTab.split(':') : [''];
-  const historyTabs: JSX.Element[] = [];
-  fileHistory.forEach((history: string, index: number) => {
-    historyTabs.push(
-      <CommandBarButton
-        key={index}
-        text={history}
-        iconProps={{ iconName: 'FileCode' }}
-        onClick={() => {
-          setOpeningTab(history);
-        }}
-      />
-    );
+  const historyTabs: ICommandBarItemProps[] = [];
+  fileHistory.forEach((history: string) => {
+    historyTabs.push({
+      key: history,
+      text: history,
+      onClick: () => {
+        setOpeningTab(history);
+      },
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore: Interface has a wrong MouseDown definition
+      onMouseDown: (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+        const otherHistory = fileHistory.filter((h) => h !== history);
+        if (e.button === 1) {
+          setFileHistory(otherHistory);
+          // If closed current tab workspace should be clear
+          if (openingTab === history) {
+            if (fileHistory.length > 1) {
+              setOpeningTab(otherHistory[0]);
+            } else {
+              setOpeningTab(undefined);
+            }
+          }
+        }
+      },
+    });
   });
   if (openingTab) {
     const breadcrumbItems = [{ key: 'namespace', text: openingTabSplit[0] }];
@@ -32,11 +52,7 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
     return (
       // TODO: 2021/3/28 historyTabs will let Stack overflow
       <>
-        <Stack horizontal styles={{ root: { height: 30, paddingLeft: 5 } }} id="history-tabs">
-          <Label>History</Label>
-          &nbsp;&nbsp;&nbsp;
-          {historyTabs}
-        </Stack>
+        <CommandBar items={historyTabs} />
         <div>
           <Breadcrumb items={breadcrumbItems} styles={{ root: { margin: '0' } }} />
         </div>
@@ -46,5 +62,20 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
       </>
     );
   }
-  return <></>;
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '100%',
+        boxSizing: 'border-box',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
+      }}
+    >
+      <Icon iconName="CodeEdit" style={{ fontSize: '10em', color: '#ddd' }} />
+      <Text style={{ fontSize: '1em', color: '#ddd', fontWeight: 600 }}>DataPack Planet</Text>
+    </div>
+  );
 }

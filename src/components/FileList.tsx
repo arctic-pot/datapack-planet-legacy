@@ -164,12 +164,8 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
       />
       <DetailsList
         onItemInvoked={(item) => {
-          if (fileHistory[0] != item.name) {
-            if (fileHistory.length > 2) {
-              setFileHistory([item.name, ...fileHistory].slice(0, 3));
-            } else {
-              setFileHistory([item.name, ...fileHistory]);
-            }
+          if (!fileHistory.includes(item.name)) {
+            setFileHistory([item.name, ...fileHistory]);
           }
           setOpeningTab(item.name);
         }}

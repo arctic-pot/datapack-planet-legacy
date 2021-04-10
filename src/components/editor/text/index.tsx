@@ -1,65 +1,107 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TextEditor';
+import $ from 'jquery';
 
-export default function TextEditor(): JSX.Element {
-  const [lines, setLines] = useState(<tbody />);
-  const [receiverPos, setReceiverPos] = useState([0, 0]);
-  const typeReceiverRef = useRef<HTMLInputElement>();
-  const editorRef = useRef<HTMLDivElement>();
-  const refreshContent = (content: string) => {
-    const contentLines = content.split('\n');
+interface ITextEditorProps {
+  fileIdentifier: string
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default function TextEditor(props: ITextEditorProps): JSX.Element {
+  const settings = JSON.parse(sessionStorage.getItem('settings'));
+  const [editorLines, setEditorLines] = useState([
+    <div key="EditorLineDefault" className="editor-line">
+      1
+    </div>,
+  ]);
+  const [editorContent, setEditorContent] = useState([
+    <div key="EditorContentDefault" className="editor-content">
+      Def
+    </div>,
+  ]);
+
+  const updateContent = (content: string) => {
     const _lines: JSX.Element[] = [];
-    contentLines.forEach((line: string, index: number) => {
+    const _content: JSX.Element[] = [];
+    content.split(/\n/g).forEach((line, index) => {
       _lines.push(
-        <tr key={`IndexedLineRow${index}`}>
-          <td className="row-num">{index + 1}</td>
-          <td className="content">{line}</td>
-        </tr>
+        <div key={`EditorLine${index}`} className="editor-line">
+          {index + 1}
+        </div>
+      );
+      _content.push(
+        <div key={`EditorContent${index}`} className="editor-content">
+          {line}
+        </div>
       );
     });
-    setLines(<tbody>{_lines}</tbody>);
+    setEditorLines(_lines);
+    setEditorContent(_content);
   };
-  // This will only available until edit is done
+
+  const updateLine = (line: number, content: string) => {
+    const _content = editorContent;
+    _content[line] = (
+      <div key={`EditorContent${line}`} className="editor-line">
+        {content}
+      </div>
+    );
+    setEditorContent(_content);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const insertLine = (line: number) => {
+    const _content = editorContent;
+    const lines = editorLines.length;
+    // Add a empty line
+    _content.splice(line, 0, <div key={`EditorContent${line}`} className="editor-line" />);
+    // Update number at last
+    setEditorLines([
+      ...editorLines,
+      <div key={`EditorLine${lines}`} className="editor-line">
+        {lines + 1}
+      </div>,
+    ]);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const updateLines = () => {
+    const _lines: JSX.Element[] = [];
+    editorContent.forEach((_, index) => {
+      _lines.push(
+        <div key={`EditorLine${index}`} className="editor-line">
+          {index + 1}
+        </div>
+      );
+    });
+    setEditorLines(_lines);
+  };
+
   useEffect(() => {
-    refreshContent('Nope!\n'.repeat(100));
+    // TEST
+    updateContent('one\ntwo\nthree\nAnd here is the fourth line');
   }, []);
 
   useEffect(() => {
-    const editorElement = editorRef.current;
-    const typeReceiverElement = typeReceiverRef.current;
-    editorElement.addEventListener('click', (e) => {
-      if ((e.target as HTMLElement).classList.contains('content')) {
-        typeReceiverElement.focus();
-        setReceiverPos([
-          e.pageX - document.querySelector('.body-col:first-child').clientWidth,
-          e.pageY - 160,
-        ]);
-      }
+    $('.editor-content,.editor-line').css({
+      fontFamily: settings.font.family,
+      fontSize: settings.font.size,
+      height: settings.font.size * 1.2,
     });
-    typeReceiverElement.addEventListener('input', (e: KeyboardEvent) => {
-      if (!e.isComposing) {
-        // TODO: typing
-      }
-      typeReceiverElement.value = '';
-    });
-  }, []);
+  }, [editorLines, editorContent]);
 
-  const settings = JSON.parse(sessionStorage.getItem('settings'));
-  const fontStyle: React.CSSProperties = {
-    fontSize: settings.font.size,
-    fontFamily: settings.font.family,
-  };
+  useEffect(() => {
+    if (editorContent.length !== editorLines.length) {
+      updateLines();
+    }
+  }, [editorContent])
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <div id="editor" style={fontStyle} ref={editorRef}>
-        <table>{lines}</table>
+    <>
+      <div className="editor">
+        <div id="editor-lines">{editorLines}</div>
+        <div id="editor-content">{editorContent}</div>
       </div>
-      <input
-        id="type-receiver"
-        ref={typeReceiverRef}
-        style={{ top: receiverPos[1], left: receiverPos[0] }}
-      />
-    </div>
+    </>
   );
 }

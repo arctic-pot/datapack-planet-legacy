@@ -164,7 +164,7 @@ export default function Body(props: PropsWithChildren<IBodyProps>): JSX.Element 
         />
       </div>
       <div className="body-col">
-        <EditorView {...{ openingTab, setOpeningTab, fileHistory }} />
+        <EditorView {...{ openingTab, setOpeningTab, fileHistory, setFileHistory }} />
       </div>
     </div>
   );

@@ -1,58 +1,19 @@
-input#type-receiver {
-  position: absolute;
-  top: 0; // This can not be appear on the page
-  left: 0;
-  color: transparent;
-  border: none;
-  outline: none;
-  width: 0;
-}
-
-div#editor {
-  z-index: 99999;
-  position: absolute;
-  scroll-behavior: smooth;
-  top: 0;
-  left: 0;
+div.editor {
   width: 100%;
-  height: calc(100% - 66px);
-  overflow: auto;
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background: #ccc;
-  }
-  table {
-    table-layout: fixed;
-    height: 100%;
-    width: 100%;
-    border-spacing: 0;
-    tbody {
-      tr {
-        td {
-          margin: 0;
-          padding: 0;
-        }
-        td.row-num {
-          box-sizing: border-box;
-          width: 55px;
-          padding-right: 3px;
-          border-right: 2px solid #d9d9d9;
-          text-align: right;
-          transition-property: border-right, padding-right;
-          transition-duration: 0.1s;
-          &:hover {
-            border-right: 3px solid #9e9e9e;
-            padding-right: 7px;
-          }
-        }
-        td.content {
-          // noinspection CssInvalidPropertyValue
-          width: -webkit-fill-avaliable;
-          padding-left: 5px;
-        }
-      }
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+  #editor-lines {
+    width: 55px;
+    margin-right: 25px;
+    div {
+      text-align: right;
     }
+  }
+
+  #editor-content {
+    // noinspection CssInvalidPropertyValue
+    width: -webkit-fill-available;
   }
 }
