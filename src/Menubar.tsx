@@ -51,6 +51,7 @@ export default function Menubar(): JSX.Element {
         <Icon iconName="ClosePane" />
       </button>
       <div className="button not-clickable" />
+      <div className="button not-clickable" />
       {sessionStorage.getItem('egg') ? null : (
         <button
           className="button"

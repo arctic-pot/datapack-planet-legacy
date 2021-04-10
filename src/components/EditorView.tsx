@@ -1,11 +1,5 @@
-import React from 'react';
-import {
-  Breadcrumb,
-  CommandBar,
-  ICommandBarItemProps,
-  Icon,
-  Text,
-} from '@fluentui/react';
+﻿import React from 'react';
+import { Breadcrumb, CommandBar, ICommandBarItemProps, Icon, Text } from '@fluentui/react';
 import Editor from './editor/Editor';
 
 interface IEditorViewProps {
@@ -62,6 +56,7 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
       </>
     );
   }
+  const bothStyle = { color: '#ddd' };
   return (
     <div
       style={{
@@ -74,8 +69,15 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
         flexDirection: 'column',
       }}
     >
-      <Icon iconName="CodeEdit" style={{ fontSize: '10em', color: '#ddd' }} />
-      <Text style={{ fontSize: '1em', color: '#ddd', fontWeight: 600 }}>DataPack Planet</Text>
+      <Icon
+        iconName="CodeEdit"
+        style={{
+          fontSize: '10em',
+          ...bothStyle,
+          textShadow: '1px 3px 6px #fff, 0 0 0 #000, 1px 3px 6px #fff',
+        }}
+      />
+      <Text style={{ fontSize: '1.5em', fontWeight: 600, ...bothStyle }}>DataPack Planet</Text>
     </div>
   );
 }

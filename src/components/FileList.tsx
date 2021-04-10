@@ -5,12 +5,13 @@ import {
   DetailsList,
   IContextualMenuItem,
   IGroup,
-  SelectionMode,
+  SelectionMode, Text
 } from '@fluentui/react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import * as electron from 'electron';
 import { IItemFormat } from './Body';
 import fs from 'fs-extra';
+import ReactDOM from 'react-dom';
 
 interface IFileListProps extends PropsWithChildren<WrappedComponentProps> {
   items: IItemFormat[];
@@ -60,14 +61,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
         });
         break;
       case '1d5344f93c80fcfe6dce702466cae1e27eef3166':
-        open(
-          'data:text/plain;base64,ICAgICAgICAgX19fX19fX19fX19fX18KICAgICAg' +
-            'ICAvICAgICAgICAgICAgIC8KICAgICAgIC8gICAgICAgICAgICAgLwogICAgICAvICAgIC' +
-            'AgICAgICAgIC8gIFRISVMgSVMgVEhFIE1BR0lDIExFVFRFUgogICAgIC8gICBnb29nbGUg' +
-            'ICAgLyAgSVQgV1JJVEVTIEFCT1VUIEhPVyBUTyBSRVNPTFZFIFlPVVIgQU5ZIFFVRVNUSU' +
-            '9OCiAgICAvICAgICAgICAgICAgIC8KICAgLyAgICAgICAgICAgICAvCiAgL19fX19f' +
-            'X19fX19fX18v'
-        );
+        ReactDOM.render(<Text>You won't expecting this!</Text>, document.getElementById('root'))
         break;
     }
   };

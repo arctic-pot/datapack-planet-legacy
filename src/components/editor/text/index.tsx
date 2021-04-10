@@ -3,7 +3,7 @@ import './TextEditor';
 import $ from 'jquery';
 
 interface ITextEditorProps {
-  fileIdentifier: string
+  fileIdentifier?: string
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
