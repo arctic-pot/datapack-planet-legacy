@@ -35,6 +35,7 @@ export default {
   'dialog.trash.current': 'At current workspace',
   'dialog.trash.workspace': 'At workspace { workspace }',
   'dialog.trash.type': 'This file is one of { type }',
+  'tips.selectFile': 'Double click a file from the left to start',
 
   'settings.save': 'Save',
   'settings.cancel': 'Cancel',

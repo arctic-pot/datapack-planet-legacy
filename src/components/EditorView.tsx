@@ -1,6 +1,7 @@
 ﻿import React from 'react';
-import { Breadcrumb, CommandBar, ICommandBarItemProps, Icon, Text } from '@fluentui/react';
+import { Breadcrumb, CommandBar, ICommandBarItemProps, Text } from '@fluentui/react';
 import Editor from './editor/Editor';
+import { FormattedMessage } from 'react-intl';
 
 interface IEditorViewProps {
   openingTab: string;
@@ -56,7 +57,7 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
       </>
     );
   }
-  const bothStyle = { color: '#ddd' };
+  const bothStyle = { color: '#ddd', fontWeight: 600 };
   return (
     <div
       style={{
@@ -69,15 +70,11 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
         flexDirection: 'column',
       }}
     >
-      <Icon
-        iconName="CodeEdit"
-        style={{
-          fontSize: '10em',
-          ...bothStyle,
-          textShadow: '1px 3px 6px #fff, 0 0 0 #000, 1px 3px 6px #fff',
-        }}
-      />
-      <Text style={{ fontSize: '1.5em', fontWeight: 600, ...bothStyle }}>DataPack Planet</Text>
+      <Text style={{ fontSize: '1.75em', ...bothStyle }}>DataPack Planet</Text>
+      <Text>&nbsp;</Text>
+      <Text style={{ fontSize: '1em', ...bothStyle }}>
+        <FormattedMessage id="tips.selectFile" />
+      </Text>
     </div>
   );
 }
