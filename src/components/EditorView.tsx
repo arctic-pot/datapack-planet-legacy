@@ -25,7 +25,7 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
       // @ts-ignore: Interface has a wrong MouseDown definition
       onMouseDown: (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
         const otherHistory = fileHistory.filter((h) => h !== history);
-        if (e.button === 1) {
+        if (e.button !== 0) {
           setFileHistory(otherHistory);
           // If closed current tab workspace should be clear
           if (openingTab === history) {
