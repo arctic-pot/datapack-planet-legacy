@@ -606,9 +606,9 @@
   "version" "14.14.22"
 
 "@types/node@^12.0.12":
-  "integrity" "sha1-DefpePtD22LaNp2xjqCIpjZzwYI="
-  "resolved" "https://registry.npm.taobao.org/@types/node/download/@types/node-12.19.15.tgz"
-  "version" "12.19.15"
+  "integrity" "sha512-TxCmnSSppKBBOzYzPR2BR25YlX5Oay8z2XGwFBInuA/Co0V9xJhLlW4kjbxKtgeNo3NOMbQP1A5Rc03y+XecPw=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-12.20.10.tgz"
+  "version" "12.20.10"
 
 "@types/parse-json@^4.0.0":
   "integrity" "sha1-L4u0QUNNFjs1+4/9zNcTiSf/uMA="
@@ -2637,9 +2637,9 @@
     "lodash.template" "^4.2.2"
     "temp" "^0.9.0"
 
-"electron@11.2.1":
-  "integrity" "sha1-hkHdGmKRGhFE4Mc8NP2fN8zGXCs="
-  "resolved" "https://registry.npm.taobao.org/electron/download/electron-11.2.1.tgz"
+"electron@^11.2.1":
+  "integrity" "sha512-Im1y29Bnil+Nzs+FCTq01J1OtLbs+2ZGLLllaqX/9n5GgpdtDmZhS/++JHBsYZ+4+0n7asO+JKQgJD+CqPClzg=="
+  "resolved" "https://registry.npmjs.org/electron/-/electron-11.2.1.tgz"
   "version" "11.2.1"
   dependencies:
     "@electron/get" "^1.0.1"
@@ -3077,8 +3077,8 @@
     "to-regex" "^3.0.1"
 
 "extract-zip@^1.0.3":
-  "integrity" "sha1-VWzDrp339FLEk6DPtRzDAneUCSc="
-  "resolved" "https://registry.npm.taobao.org/extract-zip/download/extract-zip-1.7.0.tgz"
+  "integrity" "sha512-xoh5G1W/PB0/27lXgMQyIhP5DSY/LhoCsOyZgb+6iMmRtCwVBo55uKaMoEYrDCKQhWvqEip5ZPKAc6eFNyf/MA=="
+  "resolved" "https://registry.npmjs.org/extract-zip/-/extract-zip-1.7.0.tgz"
   "version" "1.7.0"
   dependencies:
     "concat-stream" "^1.6.2"

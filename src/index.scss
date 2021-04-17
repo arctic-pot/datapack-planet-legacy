@@ -25,6 +25,16 @@ div#menubar {
   text-align: center;
   box-sizing: border-box;
 
+  .menu {
+    padding: 0 15px;
+    float: left;
+    -webkit-app-region: no-drag;
+
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+
   .button {
     height: $menubar-height;
     width: $menubar-height;

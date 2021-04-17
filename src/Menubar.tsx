@@ -1,14 +1,62 @@
-import React from 'react';
-import { Icon } from '@fluentui/react';
+import React, { useRef } from 'react';
+import { ContextualMenu, ContextualMenuItemType, Icon } from '@fluentui/react';
 import { ipcRenderer } from 'electron';
-import fs from 'fs-extra';
+import { FormattedMessage, IntlProvider } from 'react-intl';
+import { useBoolean } from './hooks';
+import { closeWorkspace } from './Menubar.utils';
+import selectWorkSpace from './utils/selectWorkSpace';
+
+const locale: string = sessionStorage.getItem('language');
+const messages = JSON.parse(sessionStorage.getItem('messages'));
 
 export default function Menubar(): JSX.Element {
+  const fileMenuRef = useRef();
+  const [fileMenuShow, toggleFileMenuShow] = useBoolean();
+
   return (
-    <>
-      <div id="icon" className="float-left">
+    <IntlProvider messages={messages} locale={locale} defaultLocale="en">
+      <div id="icon">
         DataPack Planet
       </div>
+      <div className="menu" ref={fileMenuRef} onClick={toggleFileMenuShow}>
+        <FormattedMessage id="menu.file" />
+      </div>
+      <ContextualMenu
+        target={fileMenuRef}
+        items={[
+          {
+            key: 'closeWorkspace',
+            text: messages['menu.closeWorkspace'],
+          },
+          {
+            key: 'openWorkspace',
+            text: messages['menu.openWorkspace'],
+          },
+          {
+            key: 'd1',
+            itemType: ContextualMenuItemType.Divider,
+          },
+          {
+            key: 'exit',
+            text: messages['menu.exit'],
+          },
+        ]}
+        hidden={!fileMenuShow}
+        onItemClick={(ev, item) => {
+          toggleFileMenuShow();
+          switch (item.key) {
+            case 'closeWorkspace':
+              closeWorkspace();
+              break;
+            case 'openWorkspace':
+              selectWorkSpace();
+              break;
+            case 'exit':
+              ipcRenderer.send('close');
+              break;
+          }
+        }}
+      />
       <button
         className="button"
         id="close-button"
@@ -36,18 +84,7 @@ export default function Menubar(): JSX.Element {
       >
         <Icon iconName="Refresh" />
       </button>
-      <button
-        className="button"
-        id="close-workspace-button"
-        onClick={() => {
-          fs.readJson('./settings.json').then((_data) => {
-            const data = _data;
-            data.directories.root = null;
-            fs.writeJsonSync('./settings.json', data);
-            location.reload();
-          });
-        }}
-      >
+      <button className="button" id="close-workspace-button" onClick={closeWorkspace}>
         <Icon iconName="ClosePane" />
       </button>
       <div className="button not-clickable" />
@@ -63,6 +100,6 @@ export default function Menubar(): JSX.Element {
           }}
         />
       )}
-    </>
+    </IntlProvider>
   );
 }

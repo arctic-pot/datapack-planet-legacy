@@ -14,8 +14,7 @@ initializeIcons();
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-// Load menubar at first
-ReactDOM.render(React.createElement(Menubar), document.getElementById('menubar'));
+
 // Add a spinner while app is loading
 (async () => {
   // Async operating to avoid stop the main thread
@@ -24,6 +23,7 @@ ReactDOM.render(React.createElement(Menubar), document.getElementById('menubar')
 
 fs.access('./settings.json')
   .catch(() => {
+    console.warn('No settings.json')
     fs.writeJsonSync(
       './settings.json',
       {
@@ -44,25 +44,23 @@ fs.access('./settings.json')
   .then(() => fs.ensureDir('./TRASH_BIN'))
   .then(() => fs.readJson('./settings.json'))
   .then((data) => {
-    sessionStorage.setItem('language', data.lang);
-    sessionStorage.setItem('settings', JSON.stringify(data));
-    sessionStorage.setItem('dir', data.directories.root);
-    sessionStorage.setItem('messages', JSON.stringify(locales[data.lang]));
+    sessionStorage.language = data.lang;
+    sessionStorage.settings = JSON.stringify(data);
+    sessionStorage.dir = data.directories.root;
+    sessionStorage.messages = JSON.stringify(locales[data.lang]);
     const keys = Object.keys;
     if (keys(locales[data.lang]).length < keys(locales['en']).length) {
-      sessionStorage.setItem(
-        'messages',
-        JSON.stringify({
-          ...locales['en'],
-          ...locales[data.lang],
-        })
-      );
-      sessionStorage.setItem('missingMessages', String(true));
+      sessionStorage.messages = JSON.stringify({
+        ...locales['en'],
+        ...locales[data.lang],
+      });
+      sessionStorage.missingMessages = String(true);
     }
     return data;
   })
   .then((data) => {
     // Needs to set storage and render page to keep safety
+    ReactDOM.render(React.createElement(Menubar), document.getElementById('menubar'));
     if (data.directories.root === null) {
       ReactDOM.render(React.createElement(NoDir), document.getElementById('root'));
     } else {
