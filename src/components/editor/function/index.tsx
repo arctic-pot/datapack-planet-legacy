@@ -3,11 +3,11 @@ import './TextEditor';
 import $ from 'jquery';
 
 interface ITextEditorProps {
-  fileIdentifier?: string
+  fileIdentifier?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function TextEditor(props: ITextEditorProps): JSX.Element {
+export default function FunctionEditor(props: ITextEditorProps): JSX.Element {
   const settings = JSON.parse(sessionStorage.getItem('settings'));
   const [editorLines, setEditorLines] = useState([
     <div key="EditorLineDefault" className="editor-line">
@@ -94,7 +94,7 @@ export default function TextEditor(props: ITextEditorProps): JSX.Element {
     if (editorContent.length !== editorLines.length) {
       updateLines();
     }
-  }, [editorContent])
+  }, [editorContent]);
 
   return (
     <>

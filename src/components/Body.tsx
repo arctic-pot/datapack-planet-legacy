@@ -19,6 +19,8 @@ interface IBodyProps {
   setOpeningTab: React.Dispatch<string>;
   fileHistory: string[];
   setFileHistory: React.Dispatch<string[]>;
+  openingTabType: string;
+  setOpeningTabType: React.Dispatch<string>;
 }
 
 let shouldWatch = true;
@@ -27,16 +29,12 @@ export default function Body(props: PropsWithChildren<IBodyProps>): JSX.Element 
   const filePath = path.resolve(sessionStorage.getItem('dir'), './data');
   const [items, setItems] = useState<IItemFormat[]>(_getFileListItems());
   const [groups, setGroups] = useState<IGroup[]>(_getGroups());
-  const { openingTab, setOpeningTab, fileHistory, setFileHistory } = props;
+  const { openingTab, setOpeningTab, fileHistory, setFileHistory, openingTabType, setOpeningTabType } = props;
 
   function _getFileListItems(): Array<IItemFormat> {
     function generateType(pathname: string): IItemFormat {
-      const typeList = pathname.match(
-        /(functions|advancements|recipes|loot_tables|predicates|tags)/g
-      );
-      const nameList = pathname.match(
-        /.*\/(functions|advancements|recipes|loot_tables|predicates|tags)\/(.*\/)?.*\./g
-      );
+      const typeList = pathname.match(/(functions|advancements|recipes|loot_tables|predicates|tags)/g);
+      const nameList = pathname.match(/.*\/(functions|advancements|recipes|loot_tables|predicates|tags)\/(.*\/)?.*\./g);
       const names = nameList[0];
       const [, nameNS, , ...pathTo] = names.split(/\//g);
       const pathToValid = pathTo.join('/').slice(0, pathTo.join('/').length - 1);
@@ -49,10 +47,9 @@ export default function Body(props: PropsWithChildren<IBodyProps>): JSX.Element 
         dirR: pathname,
       };
     }
-    const JSONSchemas = glob.sync(
-      './*/@(advancements|recipes|loot_tables|predicates|tags)/**/*.json',
-      { cwd: filePath }
-    );
+    const JSONSchemas = glob.sync('./*/@(advancements|recipes|loot_tables|predicates|tags)/**/*.json', {
+      cwd: filePath,
+    });
     const MCFunctions = glob.sync('./*/functions/**/*.mc' + 'function', {
       cwd: filePath,
     });
@@ -160,11 +157,20 @@ export default function Body(props: PropsWithChildren<IBodyProps>): JSX.Element 
         <FileList
           items={items}
           groups={groups}
-          {...{ setOpeningTab, fileHistory, setFileHistory }}
+          {...{ setOpeningTab, fileHistory, setFileHistory, openingTabType, setOpeningTabType }}
         />
       </div>
       <div className="body-col">
-        <EditorView {...{ openingTab, setOpeningTab, fileHistory, setFileHistory }} />
+        <EditorView
+          {...{
+            openingTab,
+            setOpeningTab,
+            fileHistory,
+            setFileHistory,
+            openingTabType,
+            setOpeningTabType,
+          }}
+        />
       </div>
     </div>
   );

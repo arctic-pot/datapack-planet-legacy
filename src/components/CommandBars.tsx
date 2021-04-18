@@ -177,9 +177,7 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
             { key: 'items', text: 'Items tag' },
           ]}
           hidden={!selectingTag}
-          onChange={(_e: FormEvent<HTMLDivElement>, item: IDropdownOption) =>
-            setTagType(item.key as string)
-          }
+          onChange={(_e: FormEvent<HTMLDivElement>, item: IDropdownOption) => setTagType(item.key as string)}
         />
         <TextField
           placeholder={intl.formatMessage({ id: 'general.nsId' })}
@@ -200,14 +198,8 @@ export default injectIntl(function CommandsBar(props: ICommandbarProps) {
           prefix={prefix}
         />
         <DialogFooter>
-          <PrimaryButton
-            onClick={createHandler}
-            text={intl.formatMessage({ id: 'button.create' })}
-          />
-          <DefaultButton
-            onClick={() => setNewDialogHidden(true)}
-            text={intl.formatMessage({ id: 'button.cancel' })}
-          />
+          <PrimaryButton onClick={createHandler} text={intl.formatMessage({ id: 'button.create' })} />
+          <DefaultButton onClick={() => setNewDialogHidden(true)} text={intl.formatMessage({ id: 'button.cancel' })} />
         </DialogFooter>
       </Dialog>
       <SettingsPanel show={settingsShow} setStateFn={setSettingsShow} />

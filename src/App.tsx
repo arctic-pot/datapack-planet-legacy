@@ -18,10 +18,11 @@ function App(): JSX.Element {
   // This array stores namespace Id
   const [fileHistory, setFileHistory] = useState<string[]>([]);
   const [openingTab, setOpeningTab] = useState<string>(null);
+  const [openingTabType, setOpeningTabType] = useState<string>('');
   return (
     <IntlProvider messages={messages} locale={locale} defaultLocale="en">
       <CommandsBar {...{ setOpeningTab, fileHistory, setFileHistory }} />
-      <Body {...{ fileHistory, setFileHistory, openingTab, setOpeningTab }} />
+      <Body {...{ fileHistory, setFileHistory, openingTab, setOpeningTab, openingTabType, setOpeningTabType }} />
     </IntlProvider>
   );
 }

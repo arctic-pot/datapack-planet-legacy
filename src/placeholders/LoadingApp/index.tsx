@@ -13,11 +13,7 @@ export default function LoadingApp(): JSX.Element {
         flexDirection: 'column',
       }}
     >
-      <Spinner
-        label="Please wait until the app is loading"
-        labelPosition="right"
-        size={SpinnerSize.large}
-      />
+      <Spinner label="Please wait until the app is loading" labelPosition="right" size={SpinnerSize.large} />
     </div>
   );
 }

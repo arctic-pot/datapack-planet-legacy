@@ -50,6 +50,10 @@ export default {
   'settings.fontSize': 'Editor font size',
   'settings.fontLigatures': 'Font ligatures',
 
+  'editor.display': 'Display',
+  'editor.title': 'Title of the advancement',
+  'editor.desc': 'Description of the advancement',
+
   'arg.type.entity': 'entity',
   'arg.type.player': 'player',
   'arg.type.pos2d': '2D coordinates',
@@ -72,8 +76,7 @@ export default {
   'mc.incomplete.rotation': 'Incomplete rotation, expected 2 coordinates',
   'mc.pos.outofworld': 'That position is out of this world',
   'mc.pos.mixed': 'Cannot mix world & local coordinates',
-  'mc.exceed.entity':
-    'Expected only one entity but the selector could select entities that exceed the limit',
+  'mc.exceed.entity': 'Expected only one entity but the selector could select entities that exceed the limit',
 
   'json.type': 'Invalid value type, expected type is { expected }',
   'json.key': "Don't know key { key } in JSON schemas",

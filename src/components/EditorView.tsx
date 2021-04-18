@@ -8,10 +8,12 @@ interface IEditorViewProps {
   setOpeningTab: React.Dispatch<string>;
   fileHistory: string[];
   setFileHistory: React.Dispatch<string[]>;
+  openingTabType: string;
+  setOpeningTabType: React.Dispatch<string>;
 }
 
 export default function EditorView(props: IEditorViewProps): JSX.Element {
-  const { openingTab, setOpeningTab, fileHistory, setFileHistory } = props;
+  const { openingTab, setOpeningTab, fileHistory, setFileHistory, openingTabType } = props;
   const openingTabSplit: string[] = openingTab ? openingTab.split(':') : [''];
   const historyTabs: ICommandBarItemProps[] = [];
   fileHistory.forEach((history: string) => {
@@ -52,7 +54,7 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
           <Breadcrumb items={breadcrumbItems} styles={{ root: { margin: '0' } }} />
         </div>
         <div style={{ height: '-webkit-fill-available', width: '100%' }}>
-          <Editor />
+          <Editor type={openingTabType} id={openingTab} />
         </div>
       </>
     );
