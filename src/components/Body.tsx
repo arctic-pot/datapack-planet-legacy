@@ -127,7 +127,7 @@ export default function Body(): JSX.Element {
       : undefined;
 
     // If no item in group, it will be filter off
-    return [group1, group2, group3, group4, group5, group6].filter((group: IGroup) => !!group);
+    return [group1, group2, group3, group4, group5, group6].filter(Boolean);
   }
 
   useEffect(() => {
