@@ -24,10 +24,7 @@ export interface TrashBinViewProps extends PropsWithChildren<WrappedComponentPro
 export default injectIntl(function TrashBinView(props: TrashBinViewProps): JSX.Element {
   const { intl, show, onDismiss } = props;
   const trashDocs: JSX.Element[] = [];
-  const heightAuto: IStyleFunctionOrObject<
-    IDocumentCardTitleStyleProps,
-    IDocumentCardTitleStyles
-  > = {
+  const heightAuto: IStyleFunctionOrObject<IDocumentCardTitleStyleProps, IDocumentCardTitleStyles> = {
     root: {
       height: 'auto',
     },
@@ -47,10 +44,7 @@ export default injectIntl(function TrashBinView(props: TrashBinViewProps): JSX.E
               title={
                 data.workspace === sessionStorage.getItem('dir')
                   ? intl.formatMessage({ id: 'dialog.trash.current' })
-                  : intl.formatMessage(
-                      { id: 'dialog.trash.workspace' },
-                      { workspace: data.workspace }
-                    )
+                  : intl.formatMessage({ id: 'dialog.trash.workspace' }, { workspace: data.workspace })
               }
               showAsSecondaryTitle
               styles={heightAuto}
@@ -61,10 +55,7 @@ export default injectIntl(function TrashBinView(props: TrashBinViewProps): JSX.E
               styles={heightAuto}
             />
             <DocumentCardActivity
-              activity={intl.formatMessage(
-                { id: 'dialog.trash.deleted' },
-                { time: intl.formatDate(data.time) }
-              )}
+              activity={intl.formatMessage({ id: 'dialog.trash.deleted' }, { time: intl.formatDate(data.time) })}
               people={[{ name: os.userInfo().username, profileImageSrc: '' }]}
             />
           </DocumentCardDetails>

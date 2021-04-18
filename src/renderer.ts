@@ -14,7 +14,6 @@ initializeIcons();
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');
 
-
 // Add a spinner while app is loading
 (async () => {
   // Async operating to avoid stop the main thread
@@ -23,7 +22,7 @@ console.log('👋 This message is being logged by "renderer.js", included via we
 
 fs.access('./settings.json')
   .catch(() => {
-    console.warn('No settings.json')
+    console.warn('No settings.json');
     fs.writeJsonSync(
       './settings.json',
       {

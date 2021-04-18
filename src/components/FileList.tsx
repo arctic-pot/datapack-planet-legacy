@@ -5,7 +5,8 @@ import {
   DetailsList,
   IContextualMenuItem,
   IGroup,
-  SelectionMode, Text
+  SelectionMode,
+  Text,
 } from '@fluentui/react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import * as electron from 'electron';
@@ -19,6 +20,8 @@ interface IFileListProps extends PropsWithChildren<WrappedComponentProps> {
   setOpeningTab: React.Dispatch<string>;
   fileHistory: string[];
   setFileHistory: React.Dispatch<string[]>;
+  openingTabType: string;
+  setOpeningTabType: React.Dispatch<string>;
 }
 
 export default injectIntl(function FileList(props: IFileListProps): JSX.Element {
@@ -26,7 +29,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [contextMenuItem, setContextMenuItem] = useState<IItemFormat>();
   const positionRef = useRef();
-  const { intl, setOpeningTab, fileHistory, setFileHistory } = props;
+  const { intl, setOpeningTab, fileHistory, setFileHistory, setOpeningTabType } = props;
   const handleItemClick = (e: React.MouseEvent<HTMLElement>, item: IContextualMenuItem) => {
     switch (item.key) {
       case 'explorer':
@@ -61,16 +64,13 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
         });
         break;
       case '1d5344f93c80fcfe6dce702466cae1e27eef3166':
-        ReactDOM.render(<Text>You won't expecting this!</Text>, document.getElementById('root'))
+        ReactDOM.render(<Text>You won't expecting this!</Text>, document.getElementById('root'));
         break;
     }
   };
   return (
     <div style={{ height: '-webkit-fill-available' }}>
-      <div
-        style={{ position: 'fixed', top: position[1] - 60, left: position[0] }}
-        ref={positionRef}
-      />
+      <div style={{ position: 'fixed', top: position[1] - 60, left: position[0] }} ref={positionRef} />
       <ContextualMenu
         title={contextMenuItem ? contextMenuItem.name : null}
         items={[
@@ -162,6 +162,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
             setFileHistory([item.name, ...fileHistory]);
           }
           setOpeningTab(item.name);
+          setOpeningTabType(item.type);
         }}
         columns={[
           {

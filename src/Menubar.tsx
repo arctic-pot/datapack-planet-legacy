@@ -15,9 +15,7 @@ export default function Menubar(): JSX.Element {
 
   return (
     <IntlProvider messages={messages} locale={locale} defaultLocale="en">
-      <div id="icon">
-        DataPack Planet
-      </div>
+      <div id="icon">DataPack Planet</div>
       <div className="menu" ref={fileMenuRef} onClick={toggleFileMenuShow}>
         <FormattedMessage id="menu.file" />
       </div>

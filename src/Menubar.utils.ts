@@ -8,4 +8,3 @@ export function closeWorkspace(): void {
     location.reload();
   });
 }
-

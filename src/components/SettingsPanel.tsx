@@ -1,14 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import {
-  Dropdown,
-  Modal,
-  Pivot,
-  PivotItem,
-  Stack,
-  Toggle,
-  PrimaryButton,
-  DefaultButton,
-} from '@fluentui/react';
+import { Dropdown, Modal, Pivot, PivotItem, Stack, Toggle, PrimaryButton, DefaultButton } from '@fluentui/react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 
 interface ISettingsPanelProps extends PropsWithChildren<WrappedComponentProps> {
