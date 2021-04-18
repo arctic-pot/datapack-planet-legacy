@@ -7,6 +7,8 @@ export default {
   'menu.closeWorkspace': 'Close current workspace',
   'menu.openWorkspace': 'Open a data pack',
   'menu.exit': 'Exit',
+  'menu.edit': 'Edit',
+  'menu.help': 'Help',
   'actions.new': 'New',
   'actions.save': 'Save All',
   'actions.open': 'Open',
