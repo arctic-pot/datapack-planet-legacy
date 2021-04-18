@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import path from 'path';
 import glob from 'glob';
 import FileList from './FileList';
@@ -13,8 +13,6 @@ export interface IItemFormat {
   dir: string;
   dirR?: string;
 }
-
-let shouldWatch = true;
 
 export default function Body(): JSX.Element {
   const filePath = path.resolve(sessionStorage.getItem('dir'), './data');
@@ -132,14 +130,12 @@ export default function Body(): JSX.Element {
     return [group1, group2, group3, group4, group5, group6].filter((group: IGroup) => !!group);
   }
 
-  if (shouldWatch) {
+  useEffect(() => {
     watch(filePath, { recursive: true }, () => {
       setGroups(_getGroups());
       setItems(_getFileListItems());
     });
-    // the file should just watch once
-    shouldWatch = false;
-  }
+  }, []);
 
   return (
     <div className="body">
