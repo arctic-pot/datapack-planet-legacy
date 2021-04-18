@@ -14,22 +14,12 @@ export interface IItemFormat {
   dirR?: string;
 }
 
-interface IBodyProps {
-  openingTab: string;
-  setOpeningTab: React.Dispatch<string>;
-  fileHistory: string[];
-  setFileHistory: React.Dispatch<string[]>;
-  openingTabType: string;
-  setOpeningTabType: React.Dispatch<string>;
-}
-
 let shouldWatch = true;
 
-export default function Body(props: PropsWithChildren<IBodyProps>): JSX.Element {
+export default function Body(): JSX.Element {
   const filePath = path.resolve(sessionStorage.getItem('dir'), './data');
   const [items, setItems] = useState<IItemFormat[]>(_getFileListItems());
   const [groups, setGroups] = useState<IGroup[]>(_getGroups());
-  const { openingTab, setOpeningTab, fileHistory, setFileHistory, openingTabType, setOpeningTabType } = props;
 
   function _getFileListItems(): Array<IItemFormat> {
     function generateType(pathname: string): IItemFormat {
@@ -154,23 +144,10 @@ export default function Body(props: PropsWithChildren<IBodyProps>): JSX.Element 
   return (
     <div className="body">
       <div className="body-col">
-        <FileList
-          items={items}
-          groups={groups}
-          {...{ setOpeningTab, fileHistory, setFileHistory, openingTabType, setOpeningTabType }}
-        />
+        <FileList items={items} groups={groups} />
       </div>
       <div className="body-col">
-        <EditorView
-          {...{
-            openingTab,
-            setOpeningTab,
-            fileHistory,
-            setFileHistory,
-            openingTabType,
-            setOpeningTabType,
-          }}
-        />
+        <EditorView />
       </div>
     </div>
   );

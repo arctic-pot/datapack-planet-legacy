@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CommandsBar from './components/CommandBars';
 import Body from './components/Body';
 import { IntlProvider } from 'react-intl';
+import { EditorContext } from './utils/contexts';
 
 const locale: string = sessionStorage.getItem('language');
 const messages = JSON.parse(sessionStorage.getItem('messages'));
@@ -21,8 +22,12 @@ function App(): JSX.Element {
   const [openingTabType, setOpeningTabType] = useState<string>('');
   return (
     <IntlProvider messages={messages} locale={locale} defaultLocale="en">
-      <CommandsBar {...{ setOpeningTab, fileHistory, setFileHistory }} />
-      <Body {...{ fileHistory, setFileHistory, openingTab, setOpeningTab, openingTabType, setOpeningTabType }} />
+      <EditorContext.Provider
+        value={{ fileHistory, setFileHistory, openingTab, setOpeningTab, openingTabType, setOpeningTabType }}
+      >
+        <CommandsBar />
+        <Body />
+      </EditorContext.Provider>
     </IntlProvider>
   );
 }

@@ -10,20 +10,18 @@ import {
   PrimaryButton,
   TextField,
 } from '@fluentui/react';
-import React, { FormEvent, PropsWithChildren, useState } from 'react';
+import React, { FormEvent, PropsWithChildren, useContext, useState } from 'react';
 import SettingsPanel from './SettingsPanel';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import createFileByNsId, { TFileType } from '../file/createFileByNsId';
 import TrashBinView from './TrashBinView';
+import { EditorContext } from '../utils/contexts';
 
-interface ICommandbarProps extends PropsWithChildren<WrappedComponentProps> {
-  fileHistory: string[];
-  setFileHistory: React.Dispatch<string[]>;
-  setOpeningTab: React.Dispatch<string>;
-}
+type ICommandbarProps = PropsWithChildren<WrappedComponentProps>
 
 export default injectIntl(function CommandsBar(props: ICommandbarProps) {
-  const { intl, fileHistory, setFileHistory, setOpeningTab } = props;
+  const { fileHistory, setFileHistory, setOpeningTab } = useContext(EditorContext);
+  const { intl } = props;
   const [newDialogHidden, setNewDialogHidden] = useState<boolean>(true);
   const [settingsShow, setSettingsShow] = useState<boolean>(false);
   const [error, setError] = useState<string>('');

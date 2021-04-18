@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useRef, useState } from 'react';
+import React, { PropsWithChildren, useContext, useRef, useState } from 'react';
 import {
   ContextualMenu,
   ContextualMenuItemType,
@@ -13,15 +13,11 @@ import * as electron from 'electron';
 import { IItemFormat } from './Body';
 import fs from 'fs-extra';
 import ReactDOM from 'react-dom';
+import { EditorContext } from '../utils/contexts';
 
 interface IFileListProps extends PropsWithChildren<WrappedComponentProps> {
   items: IItemFormat[];
   groups: IGroup[];
-  setOpeningTab: React.Dispatch<string>;
-  fileHistory: string[];
-  setFileHistory: React.Dispatch<string[]>;
-  openingTabType: string;
-  setOpeningTabType: React.Dispatch<string>;
 }
 
 export default injectIntl(function FileList(props: IFileListProps): JSX.Element {
@@ -29,7 +25,8 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [contextMenuItem, setContextMenuItem] = useState<IItemFormat>();
   const positionRef = useRef();
-  const { intl, setOpeningTab, fileHistory, setFileHistory, setOpeningTabType } = props;
+  const { intl } = props;
+  const { setOpeningTab, fileHistory, setFileHistory, setOpeningTabType } = useContext(EditorContext);
   const handleItemClick = (e: React.MouseEvent<HTMLElement>, item: IContextualMenuItem) => {
     switch (item.key) {
       case 'explorer':

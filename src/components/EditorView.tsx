@@ -1,19 +1,11 @@
-﻿import React from 'react';
+﻿import React, { useContext } from 'react';
 import { Breadcrumb, CommandBar, ICommandBarItemProps, Text } from '@fluentui/react';
 import Editor from './editor/Editor';
 import { FormattedMessage } from 'react-intl';
+import { EditorContext } from '../utils/contexts';
 
-interface IEditorViewProps {
-  openingTab: string;
-  setOpeningTab: React.Dispatch<string>;
-  fileHistory: string[];
-  setFileHistory: React.Dispatch<string[]>;
-  openingTabType: string;
-  setOpeningTabType: React.Dispatch<string>;
-}
-
-export default function EditorView(props: IEditorViewProps): JSX.Element {
-  const { openingTab, setOpeningTab, fileHistory, setFileHistory, openingTabType } = props;
+export default function EditorView(): JSX.Element {
+  const { openingTab, setOpeningTab, fileHistory, setFileHistory, openingTabType } = useContext(EditorContext);
   const openingTabSplit: string[] = openingTab ? openingTab.split(':') : [''];
   const historyTabs: ICommandBarItemProps[] = [];
   fileHistory.forEach((history: string) => {
@@ -26,7 +18,7 @@ export default function EditorView(props: IEditorViewProps): JSX.Element {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore: Interface has a wrong MouseDown definition
       onMouseDown: (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        const otherHistory = fileHistory.filter((h) => h !== history);
+        const otherHistory = fileHistory.filter((h: string) => h !== history);
         if (e.button !== 0) {
           setFileHistory(otherHistory);
           // If closed current tab workspace should be clear
