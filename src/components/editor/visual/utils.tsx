@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checkbox, Label, TextField } from '@fluentui/react';
-import { useBoolean } from '../../../hooks';
+import { useBoolean } from '../../../utils/hooks';
 
 interface ISettingsElementProps extends React.PropsWithChildren<Record<string, unknown>> {
   title: string;

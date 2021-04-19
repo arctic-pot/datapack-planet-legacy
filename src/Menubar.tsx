@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { ContextualMenu, ContextualMenuItemType, Icon } from '@fluentui/react';
 import { ipcRenderer } from 'electron';
 import { FormattedMessage, IntlProvider } from 'react-intl';
-import { useBoolean } from './hooks';
+import { useBoolean } from './utils/hooks';
 import { closeWorkspace } from './Menubar.utils';
 import selectWorkSpace from './utils/selectWorkSpace';
 
