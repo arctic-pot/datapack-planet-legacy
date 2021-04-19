@@ -1,6 +1,6 @@
 import React from 'react';
 import { DefaultButton, Label } from '@fluentui/react';
-import selectWorkSpace from '../../utils/selectWorkSpace';
+import selectWorkSpace from '../utils/selectWorkSpace';
 
 export default function NoDir(): JSX.Element {
   return (

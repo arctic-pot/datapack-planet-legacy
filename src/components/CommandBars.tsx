@@ -17,7 +17,7 @@ import createFileByNsId, { TFileType } from '../file/createFileByNsId';
 import TrashBinView from './TrashBinView';
 import { EditorContext } from '../utils/contexts';
 
-type ICommandbarProps = PropsWithChildren<WrappedComponentProps>
+type ICommandbarProps = PropsWithChildren<WrappedComponentProps>;
 
 export default injectIntl(function CommandsBar(props: ICommandbarProps) {
   const { fileHistory, setFileHistory, setOpeningTab } = useContext(EditorContext);
