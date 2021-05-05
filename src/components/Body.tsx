@@ -78,54 +78,42 @@ export default function Body(): JSX.Element {
 
     // Those groups are its id
     // Each group referenced group.startIndex is a shorthand of adding all items count
-    const group1: IGroup = advancements
-      ? {
-          key: 'group1',
-          name: 'Advancements',
-          startIndex: 0,
-          count: advancements,
-        }
-      : undefined;
-    const group2: IGroup = dimensions
-      ? {
-          key: 'group2',
-          name: 'Dimensions',
-          startIndex: advancements,
-          count: dimensions,
-        }
-      : undefined;
-    const group3: IGroup = dimensionTypes
-      ? {
-          key: 'group3',
-          name: 'Dimension Types',
-          startIndex: group2.startIndex + dimensions,
-          count: dimensionTypes,
-        }
-      : undefined;
-    const group4: IGroup = functions
-      ? {
-          key: 'group4',
-          name: 'Functions',
-          startIndex: group3.startIndex + dimensionTypes,
-          count: functions,
-        }
-      : undefined;
-    const group5: IGroup = lootTables
-      ? {
-          key: 'group5',
-          name: 'Loot Tables',
-          startIndex: group4.startIndex + functions,
-          count: lootTables,
-        }
-      : undefined;
-    const group6: IGroup = tags
-      ? {
-          key: 'group6',
-          name: 'Tags',
-          startIndex: group5.startIndex + lootTables,
-          count: tags,
-        }
-      : undefined;
+    const group1: IGroup = advancements && {
+      key: 'group1',
+      name: 'Advancements',
+      startIndex: 0,
+      count: advancements,
+    };
+    const group2: IGroup = dimensions && {
+      key: 'group2',
+      name: 'Dimensions',
+      startIndex: advancements,
+      count: dimensions,
+    };
+    const group3: IGroup = dimensionTypes && {
+      key: 'group3',
+      name: 'Dimension Types',
+      startIndex: group2.startIndex + dimensions,
+      count: dimensionTypes,
+    };
+    const group4: IGroup = functions && {
+      key: 'group4',
+      name: 'Functions',
+      startIndex: group3.startIndex + dimensionTypes,
+      count: functions,
+    };
+    const group5: IGroup = lootTables && {
+      key: 'group5',
+      name: 'Loot Tables',
+      startIndex: group4.startIndex + functions,
+      count: lootTables,
+    };
+    const group6: IGroup = tags && {
+      key: 'group6',
+      name: 'Tags',
+      startIndex: group5.startIndex + lootTables,
+      count: tags,
+    };
 
     // If no item in group, it will be filter off
     return [group1, group2, group3, group4, group5, group6].filter(Boolean);
