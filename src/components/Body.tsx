@@ -7,7 +7,7 @@ import watch from 'node-watch';
 import { IGroup } from '@fluentui/react';
 import EditorView from './EditorView';
 
-export interface IItemFormat {
+export interface IFileListItem {
   type: string;
   name: string;
   dir: string;
@@ -16,11 +16,11 @@ export interface IItemFormat {
 
 export default function Body(): JSX.Element {
   const filePath = path.resolve(sessionStorage.getItem('dir'), './data');
-  const [items, setItems] = useState<IItemFormat[]>(_getFileListItems());
+  const [items, setItems] = useState<IFileListItem[]>(_getFileListItems());
   const [groups, setGroups] = useState<IGroup[]>(_getGroups());
 
-  function _getFileListItems(): Array<IItemFormat> {
-    function generateType(pathname: string): IItemFormat {
+  function _getFileListItems(): Array<IFileListItem> {
+    function generateType(pathname: string): IFileListItem {
       const typeList = pathname.match(/(functions|advancements|recipes|loot_tables|predicates|tags)/g);
       const nameList = pathname.match(/.*\/(functions|advancements|recipes|loot_tables|predicates|tags)\/(.*\/)?.*\./g);
       const names = nameList[0];
@@ -42,7 +42,7 @@ export default function Body(): JSX.Element {
       cwd: filePath,
     });
 
-    const fileList: Array<IItemFormat> = [];
+    const fileList: Array<IFileListItem> = [];
     [...JSONSchemas, ...MCFunctions].forEach((item: string) => fileList.push(generateType(item)));
     // Sort with file name
     fileList.sort((a, b) => {
@@ -67,7 +67,7 @@ export default function Body(): JSX.Element {
       tags = 0,
       functions = 0;
 
-    _getFileListItems().forEach((item: IItemFormat) => {
+    _getFileListItems().forEach((item: IFileListItem) => {
       if (item.type === 'advancements') advancements += 1;
       if (item.type === 'functions') functions += 1;
       if (item.type === 'dimension') dimensions += 1;
@@ -76,7 +76,8 @@ export default function Body(): JSX.Element {
       if (item.type === 'tags') tags += 1;
     });
 
-    // those groups are its id
+    // Those groups are its id
+    // Each group referenced group.startIndex is a shorthand of adding all items count
     const group1: IGroup = advancements
       ? {
           key: 'group1',
@@ -97,7 +98,7 @@ export default function Body(): JSX.Element {
       ? {
           key: 'group3',
           name: 'Dimension Types',
-          startIndex: advancements + dimensions,
+          startIndex: group2.startIndex + dimensions,
           count: dimensionTypes,
         }
       : undefined;
@@ -105,7 +106,7 @@ export default function Body(): JSX.Element {
       ? {
           key: 'group4',
           name: 'Functions',
-          startIndex: advancements + dimensions + dimensionTypes,
+          startIndex: group3.startIndex + dimensionTypes,
           count: functions,
         }
       : undefined;
@@ -113,7 +114,7 @@ export default function Body(): JSX.Element {
       ? {
           key: 'group5',
           name: 'Loot Tables',
-          startIndex: advancements + dimensions + dimensionTypes + functions,
+          startIndex: group4.startIndex + functions,
           count: lootTables,
         }
       : undefined;
@@ -121,7 +122,7 @@ export default function Body(): JSX.Element {
       ? {
           key: 'group6',
           name: 'Tags',
-          startIndex: advancements + dimensions + dimensionTypes + functions + lootTables,
+          startIndex: group5.startIndex + lootTables,
           count: tags,
         }
       : undefined;
@@ -131,6 +132,7 @@ export default function Body(): JSX.Element {
   }
 
   useEffect(() => {
+    // only watch once to saving resource
     watch(filePath, { recursive: true }, () => {
       setGroups(_getGroups());
       setItems(_getFileListItems());

@@ -10,20 +10,20 @@ import {
 } from '@fluentui/react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
 import * as electron from 'electron';
-import { IItemFormat } from './Body';
+import { IFileListItem } from './Body';
 import fs from 'fs-extra';
 import ReactDOM from 'react-dom';
 import { EditorContext } from '../utils/contexts';
 
 interface IFileListProps extends PropsWithChildren<WrappedComponentProps> {
-  items: IItemFormat[];
+  items: IFileListItem[];
   groups: IGroup[];
 }
 
 export default injectIntl(function FileList(props: IFileListProps): JSX.Element {
   const [position, setPosition] = useState<number[]>([0, 0]);
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const [contextMenuItem, setContextMenuItem] = useState<IItemFormat>();
+  const [contextMenuItem, setContextMenuItem] = useState<IFileListItem>();
   const positionRef = useRef();
   const { intl } = props;
   const { setOpeningTab, fileHistory, setFileHistory, setOpeningTabType } = useContext(EditorContext);
@@ -174,7 +174,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
         items={props.items}
         compact
         selectionMode={SelectionMode.none}
-        onItemContextMenu={(item: IItemFormat, index, e: MouseEvent) => {
+        onItemContextMenu={(item: IFileListItem, index, e: MouseEvent) => {
           setPosition([e.pageX, e.pageY]);
           setShowMenu(true);
           setContextMenuItem(item);
