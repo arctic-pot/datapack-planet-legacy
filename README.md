@@ -2,12 +2,12 @@
 A cross-platform app to edit Minecraft data pack.
 
 ## About
-A nice choice to edit Minecraft Java Edition DataPack.  
-Notepad++ having ugly GUI and bad language support, 
-VSCode is built for front-end development, so we need plugins to edit it.
+A nice choice to edit DataPack in Minecraft Java Edition.
 
-The app is build with **electron** with **fluent design**.
-Window frame is using Windows style.
+We are born for a better development experience and save time.
+
+The app is building within **electron** and **fluent design** framework.
+Window frame is *Windows* system style.
 
 ### Pricing
 It's opensource and completely free
