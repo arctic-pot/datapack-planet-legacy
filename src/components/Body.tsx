@@ -93,25 +93,25 @@ export default function Body(): JSX.Element {
     const group3: IGroup = dimensionTypes && {
       key: 'group3',
       name: 'Dimension Types',
-      startIndex: group2.startIndex + dimensions,
+      startIndex: advancements + dimensions,
       count: dimensionTypes,
     };
     const group4: IGroup = functions && {
       key: 'group4',
       name: 'Functions',
-      startIndex: group3.startIndex + dimensionTypes,
+      startIndex: advancements + dimensions + dimensionTypes,
       count: functions,
     };
     const group5: IGroup = lootTables && {
       key: 'group5',
       name: 'Loot Tables',
-      startIndex: group4.startIndex + functions,
+      startIndex: advancements + dimensions + dimensionTypes + functions,
       count: lootTables,
     };
     const group6: IGroup = tags && {
       key: 'group6',
       name: 'Tags',
-      startIndex: group5.startIndex + lootTables,
+      startIndex: advancements + dimensions + dimensionTypes + functions + lootTables,
       count: tags,
     };
 
