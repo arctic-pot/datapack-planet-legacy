@@ -46,6 +46,8 @@ export default function Menubar(): JSX.Element {
         hidden={!fileMenuShow}
         onItemClick={(ev, item) => {
           toggleFileMenuShow();
+          setEditMenuShow(false);
+          setHelpMenuShow(false);
           switch (item.key) {
             case 'closeWorkspace':
               closeWorkspace();
@@ -69,6 +71,8 @@ export default function Menubar(): JSX.Element {
         hidden={!editMenuShow}
         onItemClick={() => {
           toggleEditMenuShow();
+          setFileMenuShow(false);
+          setHelpMenuShow(false);
         }}
         onDismiss={toggleEditMenuShow}
       />
@@ -81,6 +85,8 @@ export default function Menubar(): JSX.Element {
         hidden={!helpMenuShow}
         onItemClick={() => {
           toggleHelpMenuShow();
+          setEditMenuShow(false);
+          setFileMenuShow(false);
         }}
         onDismiss={toggleHelpMenuShow}
       />
