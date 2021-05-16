@@ -19,6 +19,8 @@ export default function Body(): JSX.Element {
   const [items, setItems] = useState<IFileListItem[]>(_getFileListItems());
   const [groups, setGroups] = useState<IGroup[]>(_getGroups());
 
+  // region generate display data of file list
+
   function _getFileListItems(): Array<IFileListItem> {
     function generateType(pathname: string): IFileListItem {
       const typeList = pathname.match(/(functions|advancements|recipes|loot_tables|predicates|tags)/g);
@@ -67,17 +69,16 @@ export default function Body(): JSX.Element {
       tags = 0,
       functions = 0;
 
-    _getFileListItems().forEach((item: IFileListItem) => {
-      if (item.type === 'advancements') advancements += 1;
-      if (item.type === 'functions') functions += 1;
-      if (item.type === 'dimension') dimensions += 1;
-      if (item.type === 'dimension_types') dimensionTypes += 1;
-      if (item.type === 'loot_tables') lootTables += 1;
-      if (item.type === 'tags') tags += 1;
-    });
+    _getFileListItems() // Cannot use state directly here because it will not update
+      .forEach((item: IFileListItem) => {
+        if (item.type === 'advancements') advancements += 1;
+        if (item.type === 'functions') functions += 1;
+        if (item.type === 'dimension') dimensions += 1;
+        if (item.type === 'dimension_types') dimensionTypes += 1;
+        if (item.type === 'loot_tables') lootTables += 1;
+        if (item.type === 'tags') tags += 1;
+      });
 
-    // Those groups are its id
-    // Each group referenced group.startIndex is a shorthand of adding all items count
     const group1: IGroup = advancements && {
       key: 'group1',
       name: 'Advancements',
@@ -119,9 +120,12 @@ export default function Body(): JSX.Element {
     return [group1, group2, group3, group4, group5, group6].filter(Boolean);
   }
 
+  // endregion
+
   useEffect(() => {
     // only watch once to saving resource
     watch(filePath, { recursive: true }, () => {
+      // Update groups & items when file/s were updated
       setGroups(_getGroups());
       setItems(_getFileListItems());
     });

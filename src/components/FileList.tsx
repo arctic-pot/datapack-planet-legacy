@@ -28,6 +28,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
   const { intl } = props;
   const { setOpeningTab, fileHistory, setFileHistory, setOpeningTabType } = useContext(EditorContext);
   const handleItemClick = (e: React.MouseEvent<HTMLElement>, item: IContextualMenuItem) => {
+    // region do action based on the item selected
     switch (item.key) {
       case 'explorer':
         electron.shell.showItemInFolder(contextMenuItem.dir);
@@ -64,6 +65,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
         ReactDOM.render(<Text>You won't expecting this!</Text>, document.getElementById('root'));
         break;
     }
+    // endregion
   };
   return (
     <div style={{ height: '-webkit-fill-available' }}>
@@ -71,6 +73,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
       <ContextualMenu
         title={contextMenuItem ? contextMenuItem.name : null}
         items={[
+          // region context menu items
           {
             key: 'explorer',
             text: intl.formatMessage({ id: 'actions.explorerOpen' }),
@@ -145,6 +148,7 @@ export default injectIntl(function FileList(props: IFileListProps): JSX.Element 
                 },
               ]
             : []),
+          // endregion
         ]}
         target={positionRef}
         hidden={!showMenu}

@@ -21,6 +21,7 @@ console.log('👋 This message is being logged by "renderer.js", included via we
 })();
 
 fs.access('./settings.json')
+  // region settings and trash bin
   .catch(() => {
     console.warn('No settings.json');
     fs.writeJsonSync(
@@ -42,6 +43,8 @@ fs.access('./settings.json')
   })
   .then(() => fs.ensureDir('./TRASH_BIN'))
   .then(() => fs.readJson('./settings.json'))
+  // endregion
+  // region strings for localization
   .then((data) => {
     sessionStorage.language = data.lang;
     sessionStorage.settings = JSON.stringify(data);
@@ -57,6 +60,7 @@ fs.access('./settings.json')
     }
     return data;
   })
+  // endregion
   .then((data) => {
     // Needs to set storage and render page to keep safety
     ReactDOM.render(React.createElement(Menubar), document.getElementById('menubar'));
