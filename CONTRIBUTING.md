@@ -15,14 +15,15 @@ Thanks for taking time to contribute us! The following tutorial will guide you t
 
 ## How to contribute
 ### Ask a question
-If you want to ask a question, please do **not** summit an issue. 
-You should ask in `#Q&A` of Discussion.
+If you want to ask a question, please do **not** summit an issue. You should ask in `#Q&A` of Discussion.
 
 ### Report a bug
 For report a bug, please report it in issue.
-Please describe your question clearly and fill in more information as you can, that will help us understand what is happened.
+Please describe your question clearly and fill in more information as you can, that will help us understand 
+what is happened.
 
-We will review and resolve issue as we can. If you can resolve it, you can check *I'd like to work for this issue*.
+We will review and resolve issue as we can. If you can resolve it, you can check 
+*I'd like to work for this issue*.
 
 ### Feature request
 If you're having an idea, you can describe it in Discussion.
@@ -30,26 +31,26 @@ If you're having an idea, you can describe it in Discussion.
 If you're requesting a feature, submit a new issue. Choose *Feature request* template instead *Bug report*
 
 ### Localisation
-Doesn't see your country in the language list? You can contribute to us.
-The locale files is in `/src/locale` folder. Copy the `en-us.ts` file 
-and rename to your own language with intl locale provider.
-When you do all those done, translate the string on the right side of the colon.
+Doesn't see your country in the language list? You can contribute to us. The locale files is in `/src/locale`
+folder. Copy the `en-us.ts` file and rename to your own language with intl locale provider. When you do all 
+those done, translate the string on the right side of the colon.
 
 **Note:** Do not use Google Translate and make sure the translation identifiers are completed.
 
 ### Pull request
-If you use GitHub often, you should already known how to start a pull request, But remember to follow [styleguide](#styleguide) please!
+1. Fork repo to your *own* account
+2. Change codes
+3. Using shortcut <kbd>g</kbd><kbd>p</kbd> to switch to **Pull Requests**.
+4. Summit a new request
 
-If you do not understand what this is, follow the GitHub Docs.
+Remember to follow [styleguide](#styleguide).
 
-If you start a pull request, please make sure that your code will pass the check.
-When you are sure your code has not any problem, write the reason in pull request body.
+You should not summit a commit that cannot pass the checks. 
+You should write reason clear in the body if there is some special reasons that you cannot pass the test.
 
 ## Styleguide
 ### JavaScript, TypeScript and JSX, TSX
-Code lint is using eslint.\
-ProTip: This is just a suggestion. Even we may not be able to fully comply. 
-
+Code lint is using eslint and prettier.
 - There should be a space **after** comma (`,`).
 - There should be a space **after** type qualifier (`:`).
 - There should be a space **before/after** operator (e.g.: `+`, `-`, `=`).
@@ -65,7 +66,7 @@ ProTip: This is just a suggestion. Even we may not be able to fully comply.
 - Most naming should be camelCase
 - Class and react component should be PascalCase
 - No namespace
-- Use react hooks instead ES class components
+- Use React hooks instead ES class components
 - Use inline export default if can
 - No `eval` and `new Function()`
 - No curly braces and braces around the params if can
@@ -79,4 +80,20 @@ long description
 
 footer
 ```
-Please google it by your own if you do not know.
+Subject should be one of these:
+* feat - a new feature
+* fix - bug fix
+* docs - docs (readme, contribute, etc.) update
+* refactor - a change neither *fix* nor *feat*
+* chore - changes that does not modify source code
+* style - changes that does not affect the logics
+
+Describe the commit in short description. It should be at most 50 characters.
+Use the first-person singular and begin with a verb.
+
+Long description is details about your commit. It should be wrap at 72 characters. 
+Markdown is allowed, but you should use readable chars because markdown cannot display as expected in GitHub.
+
+Footer contains closed issues, breaking changes, skip ci, etc.
+
+Only subject and short description is required, others are optional
