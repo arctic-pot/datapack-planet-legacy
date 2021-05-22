@@ -15,7 +15,7 @@ export interface IFileListItem {
 }
 
 export default function Body(): JSX.Element {
-  const filePath = path.resolve(sessionStorage.getItem('dir'), './data');
+  const filePath = path.resolve(sessionStorage.dir, './data');
   const [items, setItems] = useState<IFileListItem[]>(_getFileListItems());
   const [groups, setGroups] = useState<IGroup[]>(_getGroups());
 

@@ -9,7 +9,7 @@ interface ISettingsPanelProps extends PropsWithChildren<WrappedComponentProps> {
 
 export default injectIntl(function SettingsPanel(props: ISettingsPanelProps): JSX.Element {
   const { show, setStateFn, intl } = props;
-  const settings = JSON.parse(sessionStorage.getItem('settings'));
+  const settings = JSON.parse(sessionStorage.settings);
   const PivotWrapper = (props: PropsWithChildren<Record<string, unknown>>) => {
     return (
       <div style={{ padding: 10 }}>
