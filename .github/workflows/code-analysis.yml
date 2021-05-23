@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@master
       - name: NPM script test
         # Thanks Windows, thanks Microsoft, thanks powershell and cmd
-        run: npm run test && echo WINDOWS PASSED || echo WINDOWS FAILED
+        run: npm ci && npm run test && echo WINDOWS PASSED || echo WINDOWS FAILED
 
   linux_test:
     needs: [format, lint]
