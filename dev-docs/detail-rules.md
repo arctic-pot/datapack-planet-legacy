@@ -4,7 +4,7 @@ The format check is using eslint and prettier.
 For detail infos, it is here
 
 ### ESLint Default
-> Warning: Long content, 177 Rules
+> Warning: Long content, about 100 Rules
 
 - `accessor-pairs` 
   If setter is defined, getter should be defined too

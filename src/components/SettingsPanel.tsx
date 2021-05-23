@@ -1,10 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import { Dropdown, Modal, Pivot, PivotItem, Stack, Toggle, PrimaryButton, DefaultButton } from '@fluentui/react';
 import { injectIntl, WrappedComponentProps } from 'react-intl';
+import { StateSetter } from '../@types/react';
 
 interface ISettingsPanelProps extends PropsWithChildren<WrappedComponentProps> {
   show: boolean;
-  setStateFn: React.Dispatch<React.SetStateAction<boolean>>;
+  setStateFn: StateSetter<boolean>;
 }
 
 export default injectIntl(function SettingsPanel(props: ISettingsPanelProps): JSX.Element {
