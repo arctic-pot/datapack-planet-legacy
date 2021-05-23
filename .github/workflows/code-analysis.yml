@@ -11,4 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@master
       - name: Format check and lint
-        run: npm ci && npm run lint && npm run format:check && echo -e "\033[32m FORMAT CHECK PASSED \033[0m"
+        run: |
+          npm ci && \
+          npm run lint && \
+          npm run format:check && \
+          echo -e "\033[32m FORMAT CHECK PASSED \033[0m" || \
+          echo -e "\033[31m FORMAT CHECK FAILED \033[0m"

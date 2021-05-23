@@ -39,6 +39,7 @@ export default function FunctionEditor(props: ITextEditorProps): JSX.Element {
     setEditorContent(_content);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const updateLine = (line: number, content: string) => {
     const _content = editorContent;
     _content[line] = (
