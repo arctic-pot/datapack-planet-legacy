@@ -42,7 +42,7 @@ jobs:
         uses: actions/checkout@master
       - name: NPM script test
         # Thanks Windows, thanks Microsoft, thanks powershell and cmd
-        run: npm ci && npm run test && echo WINDOWS PASSED || echo WINDOWS FAILED && exit 1
+        run: npm ci && npm run test && echo WINDOWS PASSED || (echo WINDOWS FAILED && exit 1)
 
   linux_test:
     needs: [format, lint]
@@ -55,8 +55,8 @@ jobs:
         run: |
           npm ci && \
           npm run test && \
-          echo -e "\033[32m WINDOWS PASSED \033[0m" || \
-          (echo -e "\033[31m WINDOWS FAILED \033[0m" && exit 1)
+          echo -e "\033[32m LINUX TEST PASSED \033[0m" || \
+          (echo -e "\033[31m LINUX TEST FAILED \033[0m" && exit 1)
 
   darwin_test:
     needs: [format, lint]
@@ -69,5 +69,5 @@ jobs:
         run: |
           npm ci && \
           npm run test && \
-          echo -e "\033[32m WINDOWS PASSED \033[0m" || \
-          (echo -e "\033[31m WINDOWS FAILED \033[0m" && exit 1)
+          echo -e "\033[32m DARWIN TEST PASSED \033[0m" || \
+          (echo -e "\033[31m DARWIN TEST FAILED \033[0m" && exit 1)
