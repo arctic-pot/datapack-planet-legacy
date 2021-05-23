@@ -3,7 +3,8 @@
     "browser": true,
     "es6": true,
     "node": true,
-    "commonjs": true
+    "commonjs": true,
+    "mocha": true
   },
   "parserOptions": {
     "ecmaVersion": 2020

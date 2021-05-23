@@ -3,9 +3,24 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 jobs:
-  quality:
-    name: Lint and format check
+  format:
+    name: Format check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: Format check and lint
+        run: |
+          npm ci && \
+          npm run format:check && \
+          echo -e "\033[32m FORMAT CHECK PASSED \033[0m" || \
+          echo -e "\033[31m FORMAT CHECK FAILED \033[0m"
+  lint:
+    name: ESLint check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -14,6 +29,44 @@ jobs:
         run: |
           npm ci && \
           npm run lint && \
-          npm run format:check && \
-          echo -e "\033[32m FORMAT CHECK PASSED \033[0m" || \
-          echo -e "\033[31m FORMAT CHECK FAILED \033[0m"
+          echo -e "\033[32m LINT PASSED \033[0m" || \
+          echo -e "\033[31m LINT FAILED \033[0m"
+
+  windows_test:
+    needs: [format, lint]
+    name: Unit test on Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: NPM script test
+        # Thanks Windows, thanks Microsoft, thanks powershell and cmd
+        run: npm run test && echo WINDOWS PASSED || echo WINDOWS FAILED
+
+  linux_test:
+    needs: [format, lint]
+    name: Unit test on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+      uses: actions/checkout@master
+        - name: NPM script test
+          run: |
+            npm ci && \
+            npm run test && \
+            echo -e "\033[32m WINDOWS PASSED \033[0m" || \
+            echo -e "\033[31m WINDOWS FAILED \033[0m"
+
+  darwin_test:
+    needs: [format, lint]
+    name: Unit test on Darwin
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+      - name: NPM script test
+        run: |
+          npm ci && \
+          npm run test && \
+          echo -e "\033[32m WINDOWS PASSED \033[0m" || \
+          echo -e "\033[31m WINDOWS FAILED \033[0m"
