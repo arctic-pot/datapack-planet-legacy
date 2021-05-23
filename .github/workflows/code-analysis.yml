@@ -49,13 +49,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-      uses: actions/checkout@master
-        - name: NPM script test
-          run: |
-            npm ci && \
-            npm run test && \
-            echo -e "\033[32m WINDOWS PASSED \033[0m" || \
-            echo -e "\033[31m WINDOWS FAILED \033[0m"
+        uses: actions/checkout@master
+      - name: NPM script test
+        run: |
+          npm ci && \
+          npm run test && \
+          echo -e "\033[32m WINDOWS PASSED \033[0m" || \
+          echo -e "\033[31m WINDOWS FAILED \033[0m"
 
   darwin_test:
     needs: [format, lint]
